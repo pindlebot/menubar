@@ -1,0 +1,28 @@
+{
+  "name": "menubar",
+  "regions": [
+    "us-east-1"
+  ],
+  "static": {
+    "dir": "dist"
+  },
+  "lambda": {
+    "memory": 1536
+  },
+  "environment": {
+    "TOKEN": "${ssm:/menubar/TOKEN}",
+    "PROJECT_ID": "${ssm:/menubar/PROJECT_ID}"
+  },
+  "hooks": {
+    "build": "yarn build",
+    "clean": [
+      "up-env restore"
+    ]
+  },
+  "stages": {
+    "production": {
+      "domain": "menubar.io",
+      "zone": "menubar.io"
+    }
+  }
+}
