@@ -4,15 +4,17 @@ import Menu from 'antd/lib/menu'
 import Breadcrumb from 'antd/lib/breadcrumb'
 import Router from 'next/router'
 import Link from 'next/link'
-import AutoComplete from '../AutoComplete'
 import Popover from 'antd/lib/popover'
 import Form from 'antd/lib/form'
 import Input from 'antd/lib/input'
-import Editor from './Editor'
-import Button from 'antd/lib/button'
-import 'isomorphic-fetch'
 import Modal from 'antd/lib/modal'
-import ReactCSSTransitionReplace from 'react-css-transition-replace';
+import Button from 'antd/lib/button'
+import Icon from 'antd/lib/icon'
+import 'isomorphic-fetch'
+import ReactCSSTransitionReplace from 'react-css-transition-replace'
+
+import Editor from './Editor'
+import AutoComplete from '../AutoComplete'
 
 const ContactForm = props => {
   return (
@@ -68,27 +70,33 @@ class AppLayout extends React.Component {
   }
   
   render () {
+    let selectedKeys = typeof window !== 'undefined'
+      ? [window.location.pathname]
+      : []
     return (
       <Layout>
         <Layout.Header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '50px' }}>
-          <div className="logo" style={{width: '40vw'}}>
-            <a href={'/'} style={{color: "#fff"}}>Menubar.io</a>
+          <div className="logo">
+            <a href={'/'} style={{color: "#fff", marginRight: '15px'}}>Menubar.io</a>
+            <AutoComplete />
           </div>
-          <AutoComplete />
           <Menu
             theme="dark"
             mode="horizontal"
-            defaultSelectedKeys={['1']}
+            selectedKeys={selectedKeys}
             style={{ lineHeight: '50px' }}
           >
-            <Menu.Item key="1">
+            <Menu.Item key="/">
               <a href={'/'}>Home</a>
             </Menu.Item>
-            <Menu.Item key="2">
+            <Menu.Item key="/about">
               <Link href={'/about'}><a>About</a></Link>
             </Menu.Item>
-            <Menu.Item key="3" onClick={this.handleClick}>
+            <Menu.Item key="/contact" onClick={this.handleClick}>
               <a>Contact</a>
+            </Menu.Item>
+            <Menu.Item>
+              <a href={'https://github.com/unshift/menubar-next'}><Icon type="github" /></a>
             </Menu.Item>
           </Menu>
         </Layout.Header>

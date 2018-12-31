@@ -15,10 +15,14 @@ export default class MyDocument extends Document {
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.0.0/trix.css" />
           <style dangerouslySetInnerHTML={{
             __html: `
+              @import url('https://rsms.me/inter/inter-ui.css');
+
               body {
                 line-height: 1.6;
                 font-size: 16px;
                 margin: 0;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
               }
               pre {
                 padding: 10px;

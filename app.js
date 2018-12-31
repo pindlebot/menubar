@@ -47,13 +47,8 @@ const sendEmail = (params) => {
     url += `&X-Amz-Security-Token=${encodeURIComponent(process.env.AWS_SESSION_TOKEN)}`
   }
 
-  console.log({
-    url,
-    signed
-  })
   fetch(url, signed)
     .then(resp => resp.text())
-    .then(console.log.bind(console))
 }
 
 const createFetch = async ({ query, variables }) => {

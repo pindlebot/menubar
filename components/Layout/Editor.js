@@ -3,7 +3,6 @@ import React from 'react'
 const convertToPlain = ({ blockList }) => {
   const { objects } = blockList
   let blocks = objects.reduce((a, c) => a.concat(c.text.pieceList.objects), [])
-  console.log(blocks)
 }
 
 export default class Editor extends React.Component {

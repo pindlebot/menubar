@@ -10,7 +10,6 @@ export default class MyApp extends App {
 
   render () {
     const { Component, pageProps } = this.props
-    console.log(this.props)
     return (
       <Container>
         <Component {...pageProps} />

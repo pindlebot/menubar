@@ -6,12 +6,6 @@ import Card from 'antd/lib/card'
 import Avatar from 'antd/lib/avatar'
 
 class About extends React.Component {
-  handleChange = (...args) => {
-    console.log(args)
-  }
-  onEditorReady = (...args) => {
-    console.log(args)
-  }
   render () {
     return (
       <Layout>
