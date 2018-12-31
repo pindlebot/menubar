@@ -1,5 +1,6 @@
 *
 !dist/**
-!server.js
+!app.js
 !node_modules/**
 !next.config.js
+!package.json

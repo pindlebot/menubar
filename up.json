@@ -7,7 +7,16 @@
     "dir": "dist"
   },
   "lambda": {
-    "memory": 1536
+    "memory": 1536,
+    "policy": [
+      {
+        "Effect": "Allow",
+        "Resource": "*",
+        "Action": [
+          "ses:SendEmail"
+        ]
+      }
+    ]
   },
   "environment": {
     "TOKEN": "${ssm:/menubar/TOKEN}",

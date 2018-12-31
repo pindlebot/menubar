@@ -10,14 +10,15 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <style>{`body { margin: 0 }`}</style>
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.11.6/antd.css" />
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism.min.css" />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.0.0/trix.css" />
           <style dangerouslySetInnerHTML={{
             __html: `
               body {
                 line-height: 1.6;
                 font-size: 16px;
+                margin: 0;
               }
               pre {
                 padding: 10px;
@@ -38,12 +39,36 @@ export default class MyDocument extends Document {
                 color: #fff;
               }
               .post-title {
-                margin-left: 5px;
               }
               .main {
                 background-color: #fff;
                 padding: 24px;
                 min-height: calc(100vh - 173px);
+              }
+              .trix-button-group--history-tools {
+                display: none !important;
+              }
+              .ant-modal-body {
+                min-height: 255px;
+              }
+              .cross-fade-leave {
+                opacity: 1;
+              }
+              .cross-fade-leave.cross-fade-leave-active {
+                opacity: 0;
+                transition: opacity 1s ease-in;
+              }
+              
+              .cross-fade-enter {
+                opacity: 0;
+              }
+              .cross-fade-enter.cross-fade-enter-active {
+                opacity: 1;
+                transition: opacity 1s ease-in;
+              }
+              
+              .cross-fade-height {
+                transition: height .5s ease-in-out;
               }
             `
           }} />

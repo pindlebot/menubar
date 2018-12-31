@@ -5,21 +5,15 @@ import Layout from '../components/Layout'
 
 class App extends React.Component {
   static defaultProps = {
-    posts: [],
     page: 1,
     next: 2
   }
-
-  static async getInitialProps (ctx) {
-    return ctx.query
-  }
-
   render () {
     const post = this.props.post || {}
     return (
-      <Layout posts={[]}>
+      <Layout>
         <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item><Link href={'/'}><a>Home</a></Link></Breadcrumb.Item>
+          <Breadcrumb.Item><a href={'/'}>Home</a></Breadcrumb.Item>
           <Breadcrumb.Item><Link href={`/${post.slug}`}><a>{post.title}</a></Link></Breadcrumb.Item>
         </Breadcrumb>
         <div className={'main'}>

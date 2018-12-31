@@ -1,19 +1,22 @@
 import React from 'react'
 import Layout from '../components/Layout'
 import Link from 'next/link'
+import Breadcrumb from 'antd/lib/breadcrumb'
+import Card from 'antd/lib/card'
+import Avatar from 'antd/lib/avatar'
 
-import { Card, Avatar, Breadcrumb } from 'antd';
-
-class App extends React.Component {
-  static async getInitialProps (ctx) {
-    return {}
+class About extends React.Component {
+  handleChange = (...args) => {
+    console.log(args)
   }
-
+  onEditorReady = (...args) => {
+    console.log(args)
+  }
   render () {
     return (
-      <Layout posts={[]}>
+      <Layout>
         <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item><Link href={'/'}><a>Home</a></Link></Breadcrumb.Item>
+          <Breadcrumb.Item><a href={'/'}>Home</a></Breadcrumb.Item>
           <Breadcrumb.Item><Link href={`/about`}><a>About</a></Link></Breadcrumb.Item>
         </Breadcrumb>
         <div className={'main'}>
@@ -25,5 +28,5 @@ class App extends React.Component {
   }
 }
 
-export default App
+export default About
 

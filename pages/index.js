@@ -1,8 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
-import { Card, Avatar, Pagination } from 'antd';
-
+import Card from 'antd/lib/card'
+import Avatar from 'antd/lib/avatar'
+import Pagination from 'antd/lib/pagination'
 import Layout from '../components/Layout'
 
 function formatDate (dateString) {
@@ -36,10 +37,6 @@ class App extends React.Component {
     next: 2
   }
 
-  static async getInitialProps (ctx) {
-    return ctx.query
-  }
-
   handlePageChange = page => {
     Router.push(`/page/${page}`)
   }
@@ -47,7 +44,7 @@ class App extends React.Component {
   render () {
     const posts = this.props.posts || []
     return (
-      <Layout posts={posts}>
+      <Layout>
         <div style={{display:'grid', gridTemplateColumns: 'repeat(2, calc(50vw - 60px))', gridGap: '20px', margin: '24px 0px' }}>
           {posts.map(post => (
             <PostCard post={post} key={post.id} />
@@ -66,4 +63,3 @@ class App extends React.Component {
 }
 
 export default App
-
