@@ -10,6 +10,8 @@ script:
   - yarn add travis-up
 before_deploy:
   - ./bin/up version
+  - node_modules/.bin/up-env load
+
 deploy:
   provider: script
   script: ./bin/up deploy production
