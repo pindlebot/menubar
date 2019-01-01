@@ -18,7 +18,7 @@ class App extends React.Component {
         </Breadcrumb>
         <div className={'main'}>
           <h2 className={'post-title'}>{post.title}</h2>
-          <div dangerouslySetInnerHTML={{ __html: post.document.html }}></div>
+          <div className={'post-content'} dangerouslySetInnerHTML={{ __html: post.document.html }}></div>
         </div>
       </Layout>
     )

@@ -95,6 +95,11 @@ class AppLayout extends React.Component {
             <Menu.Item key="/contact" onClick={this.handleClick}>
               <a>Contact</a>
             </Menu.Item>
+            <Menu.Item key={'/projects'}>
+              <Link href={'/projects'}>
+                Projects
+              </Link>
+            </Menu.Item>
             <Menu.Item>
               <a href={'https://github.com/unshift/menubar-next'}><Icon type="github" /></a>
             </Menu.Item>

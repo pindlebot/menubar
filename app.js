@@ -134,6 +134,54 @@ const fetchPost = (req, res) => {
     })
 }
 
+const fetchRepositories = async (variables = { after: null, first: 10, last: null, before: null }) => {
+  const { data } = await fetch('https://api.github.com/graphql', {
+    method: 'POST',
+    headers: {
+      'Authorization': `bearer ${process.env.GITHUB_TOKEN}`,
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      variables: variables,
+      query: `query($first: Int, $last: Int, $before: String, $after: String) {
+        viewer {
+          name
+          repositories(
+            before: $before,
+            after: $after,
+            first: $first,
+            last: $last,
+            orderBy: { field: UPDATED_AT, direction: DESC }
+          ) {
+            nodes {
+              id
+              name
+              description
+              homepageUrl
+              resourcePath
+              languages(first: $first) {
+                nodes {
+                  id
+                  name
+                }
+              }
+              stargazers {
+                totalCount
+              }
+            }
+            pageInfo {
+              endCursor
+              hasNextPage
+              hasPreviousPage
+            }
+          }
+        }
+      }`
+    })
+  }).then(resp => resp.json())
+  return data.viewer.repositories
+}
+
 app.prepare().then(() => {
   const server = express()
   server.post('/send', bodyParser.json(), async (req, res) => {
@@ -162,6 +210,15 @@ app.prepare().then(() => {
       }`
     })
     res.status(200).json(data)
+  })
+
+  server.post('/api/projects', bodyParser.json(), async (req, res) => {
+    let repositories = await fetchRepositories(req.body)
+    res.status(200).json({ repositories })
+  })
+
+  server.get('/projects/:cursor?', async (req, res) => {
+    return app.render(req, res, '/projects', {})
   })
 
   server.get('/page/:page', async (req, res) => {

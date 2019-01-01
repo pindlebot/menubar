@@ -20,7 +20,8 @@
   },
   "environment": {
     "TOKEN": "${ssm:/menubar/TOKEN}",
-    "PROJECT_ID": "${ssm:/menubar/PROJECT_ID}"
+    "PROJECT_ID": "${ssm:/menubar/PROJECT_ID}",
+    "GITHUB_TOKEN": "${ssm:/menubar/GITHUB_TOKEN}"
   },
   "hooks": {
     "build": "yarn build",
