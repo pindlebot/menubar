@@ -21,7 +21,11 @@
   "environment": {
     "TOKEN": "${ssm:/menubar/TOKEN}",
     "PROJECT_ID": "${ssm:/menubar/PROJECT_ID}",
-    "GITHUB_TOKEN": "${ssm:/menubar/GITHUB_TOKEN}"
+    "GITHUB_TOKEN": "${ssm:/menubar/GITHUB_TOKEN}",
+    "GRAPHQL_ENDPOINT": "${ssm:/menubar/GRAPHQL_ENDPOINT}",
+    "BASE_URI": "${ssm:/menubar/BASE_URI}",
+    "SES_DESTINATION_ADDRESS": "${ssm:/menubar/SES_DESTINATION_ADDRESS}",
+    "SES_SOURCE_ARN": "${ssm:/menubar/SES_SOURCE_ARN}"
   },
   "hooks": {
     "build": "yarn build",

@@ -20,14 +20,39 @@ pre {
   margin-bottom: 1em;
 }
 
-.menubar-autocomplete input {
-  background-color: #172A3C !important;
-  border: none !important;
-  border-radius: 0 !important;
-}
+.mb-autocomplete {
+  .ant-select-selection {
+    border-radius: 0;
+    background-color: #172A3C;
 
-.menubar-autocomplete .ant-input-suffix i {
-  color: #fff;
+    .mb-input {
+      input.ant-input {
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        color: #fff;
+      }
+      .ant-input-suffix i {
+        color: #fff;
+      }
+
+      &.mb-focused {
+        input.ant-input {
+          color: rgba(0, 0, 0, 0.65);
+          background-color: #fff;
+        }
+        .ant-input-suffix i {
+          color: rgba(0, 0, 0, 0.65);
+        }
+      }
+    }
+  }
+  
+
+  .mb-input.mb-focused {
+    background-color: #fff;
+    
+  }
 }
 
 .post-title {}

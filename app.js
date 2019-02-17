@@ -12,8 +12,15 @@ const querystring = require('querystring');
 const handle = app.getRequestHandler()
 
 const PAGE_SIZE = 10
-const BASE_URI = 'https://menubar.io/'
-const { PROJECT_ID, TOKEN } = process.env
+
+const {
+  BASE_URI,
+  PROJECT_ID,
+  TOKEN,
+  GRAPHQL_ENDPOINT,
+  SES_SOURCE_ARN,
+  SES_DESTINATION_ADDRESS
+} = process.env
 
 let cache = new Map()
 
@@ -25,7 +32,7 @@ const sendEmail = (params) => {
     body: querystring.stringify({
       Action: 'SendEmail',
       Version: '2010-12-01',
-      'Destination.ToAddresses.member.1': 'bgardner620@gmail.com',
+      'Destination.ToAddresses.member.1': SES_DESTINATION_ADDRESS,
       'Message.Body.Html.Data': params.message,
       'Message.Body.Html.Charset': 'utf8',
       'Message.Body.Text.Data': params.message,
@@ -34,7 +41,7 @@ const sendEmail = (params) => {
       'Message.Subject.Charset': 'utf8',
       Source: 'no-reply@letterpost.co',
       'ReplyToAddresses.member.1': params.from,
-      SourceArn: 'arn:aws:ses:us-east-1:761245233224:identity/no-reply@letterpost.co'
+      SourceArn: SES_SOURCE_ARN
     })
   }
   let signed = aws4.sign(opts, {
@@ -53,7 +60,7 @@ const sendEmail = (params) => {
 
 const createFetch = async ({ query, variables }) => {
   if (!cache.has(query)) {
-    let url = 'http://api.contentkit.co/graphql'
+    let url = GRAPHQL_ENDPOINT
     let body = JSON.stringify({
       operationName: null,
       query: query,
