@@ -74,7 +74,7 @@ class AppLayout extends React.Component {
       ? [window.location.pathname]
       : []
     return (
-      <Layout>
+      <Layout style={{ height: '100%' }}>
         <Layout.Header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '50px' }}>
           <div className="logo">
             <a href={'/'} style={{color: "#fff", marginRight: '15px'}}>Menubar.io</a>
