@@ -6,7 +6,6 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev, conf: require('../next.config.js') })
 const bodyParser = require('body-parser')
 const handle = app.getRequestHandler()
-const redis = require('redis')
 
 const {
   sendEmail,
@@ -19,10 +18,6 @@ const {
 const {
   PROJECT_ID
 } = process.env
-
-const cache = require('apicache')
-  .options({ redisClient: redis.createClient(process.env.REDIS_URL) })
-  .middleware
 
 app.prepare().then(async () => {
   const server = express()
@@ -48,16 +43,16 @@ app.prepare().then(async () => {
     res.status(200).json(data)
   })
 
-  server.post('/api/projects', cache('30 minutes'), bodyParser.json(), async (req, res) => {
+  server.post('/api/projects', bodyParser.json(), async (req, res) => {
     let repositories = await fetchRepositories(req.body)
     res.status(200).json({ repositories })
   })
 
-  server.get('/projects/:cursor?', cache('30 minutes'), async (req, res) => {
+  server.get('/projects/:cursor?', async (req, res) => {
     return app.render(req, res, '/projects', {})
   })
 
-  server.get('/page/:page', cache('30 minutes'), async (req, res) => {
+  server.get('/page/:page', async (req, res) => {
     const props = await fetchPage(req, res)
     return app.render(req, res, '/', { params: req.params, ...props })
   })
@@ -67,7 +62,7 @@ app.prepare().then(async () => {
     return app.render(req, res, '/', props)
   })
 
-  server.get('/:slug', cache('30 minutes'), async (req, res, next) => {
+  server.get('/:slug', async (req, res, next) => {
     const slug = req.params.slug
     if (slug === 'favicon.ico') {
       return res.status(204).json({})
