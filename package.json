@@ -1,11 +1,12 @@
 {
   "name": "menubar",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "app/index.js",
   "license": "MIT",
   "dependencies": {
     "@zeit/next-sass": "^1.0.1",
     "antd": "^3.11.6",
+    "apicache": "^1.4.0",
     "aws4": "^1.8.0",
     "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
@@ -17,13 +18,13 @@
     "react": "^16.7.0",
     "react-css-transition-replace": "^3.0.3",
     "react-dom": "^16.7.0",
-    "trix": "^1.0.0",
-    "up-env": "^0.0.12"
+    "redis": "^2.8.0",
+    "trix": "^1.0.0"
   },
   "scripts": {
-    "dev": "node app.js",
+    "dev": "node app",
     "build": "next build",
-    "start": "NODE_ENV=production node app.js"
+    "start": "NODE_ENV=production node app"
   },
   "repository": {
     "type": "git",

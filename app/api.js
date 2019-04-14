@@ -1,17 +1,7 @@
-require('dotenv').config()
-const express = require('express')
-const next = require('next')
 const fetch = require('node-fetch')
 const unescape = require('lodash.unescape')
-const port = parseInt(process.env.PORT, 10) || 3000
-const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev, conf: require('./next.config.js') })
-const bodyParser = require('body-parser')
 const aws4 = require('aws4')
-const querystring = require('querystring');
-const handle = app.getRequestHandler()
-
-const PAGE_SIZE = 10
+const querystring = require('querystring')
 
 const {
   BASE_URI,
@@ -21,10 +11,42 @@ const {
   SES_SOURCE_ARN,
   SES_DESTINATION_ADDRESS
 } = process.env
+const client = require('redis').createClient(process.env.REDIS_URL)
 
-let cache = new Map()
+const cache = {
+  get (key) {
+    return new Promise((resolve, reject) => client.get(`menubar/${key}`, (_, data) => resolve(JSON.parse(data))))
+  },
+  set (key, value) {
+    return new Promise(resolve => client.set(`menubar/${key}`, JSON.stringify(value), (_, data) => resolve(data)))
+  }
+}
 
-const sendEmail = (params) => {
+const createFetch = async ({ query, variables }) => {
+  let json = await cache.get(query)
+  if (!json) {
+    let url = GRAPHQL_ENDPOINT
+    let body = JSON.stringify({
+      operationName: null,
+      query: query,
+      variables: variables || {}
+    })
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${TOKEN}`,
+        'Content-type': 'application/json'
+      },
+      body: body
+    })
+    json = await resp.json()
+    await cache.set(query, json)
+  }
+
+  return json
+}
+
+module.exports.sendEmail = (params) => {
   const opts = {
     service: 'ses',
     path: '/',
@@ -49,7 +71,7 @@ const sendEmail = (params) => {
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
   })
   let url = `https://${signed.headers.Host}`
-  
+
   if (process.env.AWS_SESSION_TOKEN) {
     url += `&X-Amz-Security-Token=${encodeURIComponent(process.env.AWS_SESSION_TOKEN)}`
   }
@@ -58,30 +80,7 @@ const sendEmail = (params) => {
     .then(resp => resp.text())
 }
 
-const createFetch = async ({ query, variables }) => {
-  if (!cache.has(query)) {
-    let url = GRAPHQL_ENDPOINT
-    let body = JSON.stringify({
-      operationName: null,
-      query: query,
-      variables: variables || {}
-    })
-    const resp = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${TOKEN}`,
-        'Content-type': 'application/json',
-      },
-      body: body
-    })
-    const json = await resp.json()
-    cache.set(query, json)
-  }
- 
-  return Promise.resolve(cache.get(query))   
-}
-
-const fetchPage = (req, res) => {
+module.exports.fetchPage = (req, res) => {
   let params = req.params || {}
   let page = parseInt(params.page || 0)
   let offset = page * 10
@@ -114,7 +113,7 @@ const fetchPage = (req, res) => {
     })
 }
 
-const fetchPost = (req, res) => {
+module.exports.fetchPost = (req, res) => {
   const { slug } = req.params
   return createFetch({
     query: `{
@@ -141,7 +140,7 @@ const fetchPost = (req, res) => {
     })
 }
 
-const fetchRepositories = async (variables = { after: null, first: 10, last: null, before: null }) => {
+module.exports.fetchRepositories = async (variables = { after: null, first: 10, last: null, before: null }) => {
   const { data } = await fetch('https://api.github.com/graphql', {
     method: 'POST',
     headers: {
@@ -189,73 +188,4 @@ const fetchRepositories = async (variables = { after: null, first: 10, last: nul
   return data.viewer.repositories
 }
 
-app.prepare().then(() => {
-  const server = express()
-  server.post('/send', bodyParser.json(), async (req, res) => {
-    const body = req.body;
-    await sendEmail(body)
-    res.status(200).json({})
-  })
-
-  server.get('/invalidate', (req, res) => {
-    cache = new Map()
-    res.status(200).json({
-      invalidated: true
-    })
-  })
-  server.post('/search', bodyParser.json(), async (req, res) => {
-    const body = req.body;
-    let data = await createFetch({
-      query: `{
-        feed(projectId: "${PROJECT_ID}", query: "${body.query}") {
-          posts {
-            id,
-            title
-            slug
-          }
-        }
-      }`
-    })
-    res.status(200).json(data)
-  })
-
-  server.post('/api/projects', bodyParser.json(), async (req, res) => {
-    let repositories = await fetchRepositories(req.body)
-    res.status(200).json({ repositories })
-  })
-
-  server.get('/projects/:cursor?', async (req, res) => {
-    return app.render(req, res, '/projects', {})
-  })
-
-  server.get('/page/:page', async (req, res) => {
-    const props = await fetchPage(req, res)
-    return app.render(req, res, '/', { params: req.params, ...props })
-  })
-
-  server.get('/', async (req, res) => {
-    const props = await fetchPage(req, res)
-    return app.render(req, res, '/', props)
-  })
-
-  server.get('/:slug', async (req, res, next) => {
-    const slug = req.params.slug
-    if (slug === 'favicon.ico') {
-      return res.status(204).json({})
-    }
-    if (slug === 'about') {
-      return next()
-    }
-    const props = await fetchPost(req, res)
-    return app.render(req, res, '/post', { params: req.params, ...props })
-  })
-
-  server.get('*', (req, res) => {
-    return handle(req, res)
-  })
-
-  server.listen(port, err => {
-    if (err) throw err
-    console.log(`> Ready on http://localhost:${port}`)
-  })
-})
+module.exports.createFetch = createFetch

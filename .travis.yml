@@ -7,10 +7,11 @@ branches:
 install:
   - yarn --ignore-engines
 script: 
+  - sudo apt-get install jq
   - yarn add travis-up
+  - sh bin/vault.sh
 before_deploy:
   - ./bin/up version
-  - node_modules/.bin/up-env load
 
 deploy:
   provider: script
