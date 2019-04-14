@@ -1,6 +1,6 @@
 *
 !dist/**
-!app.js
+!app/**
 !node_modules/**
 !next.config.js
 !package.json

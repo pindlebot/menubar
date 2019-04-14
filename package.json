@@ -27,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "remote": "https://github.com/unshift/menubar-next.git"
+    "remote": "https://github.com/unshift/menubar.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
