@@ -46,6 +46,20 @@ class AppLayout extends React.Component {
     success: false
   }
 
+  componentDidMount () {
+    window.fathom = window.fathom || function() {
+      window.fathom.q = (window.fathom.q || [])
+      window.fathom.q.push(arguments)
+    }
+    const script = document.createElement('script')
+    script.src = '//fathom.contentkit.co/tracker.js'
+    script.async = false
+    script.id = 'fathom-script'
+    document.head.appendChild(script)
+    window.fathom('set', 'siteId', 'OLVFR')
+    window.fathom('trackPageview')
+  }
+
   handleSubmit = async evt => {
     evt.preventDefault()
     let values = this.props.form.getFieldsValue()
