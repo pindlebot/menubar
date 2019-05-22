@@ -1,0 +1,12 @@
+
+{
+  "name": "wwwwmenubar",
+  "profile": "default",
+  "regions": ["us-east-1"],
+  "stages": {
+    "production": {
+      "domain": "www.menubar.io",
+      "zone": "menubar.io"
+    }
+  }
+}
