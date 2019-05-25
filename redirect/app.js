@@ -1,7 +1,7 @@
 const http = require('http')
 const {
   PORT = 3000,
-  REDIRECT_URL = 'https://menubar.com'
+  REDIRECT_URL = 'https://menubar.io'
 } = process.env
 
 http.createServer((req, res) => {
