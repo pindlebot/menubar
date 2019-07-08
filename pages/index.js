@@ -5,6 +5,7 @@ import Card from 'antd/lib/card'
 import Avatar from 'antd/lib/avatar'
 import Pagination from 'antd/lib/pagination'
 import Layout from '../components/Layout'
+import styles from '../styles/index.scss'
 
 function formatDate (dateString) {
   if (!dateString) return ''
@@ -18,17 +19,19 @@ function formatDate (dateString) {
   ].join('/')
 }
 
-const PostCard = ({ post }) => (
-  <Card>
-    <Card.Meta
-      avatar={<Avatar src="https://avatars3.githubusercontent.com/u/19880087" />}
-      title={
-        <Link href={`/${post.slug}`}><a>{post.title}</a></Link>
-      }
-      description={formatDate(post.publishedAt)}
-    />
-  </Card>
-)
+function PostCard ({ post }) {
+  return (
+    <Card>
+      <Card.Meta
+        avatar={<Avatar src="https://avatars3.githubusercontent.com/u/19880087" />}
+        title={
+          <Link href={`/${post.slug}`}><a>{post.title}</a></Link>
+        }
+        description={formatDate(post.publishedAt)}
+      />
+    </Card>
+  )
+}
 
 class App extends React.Component {
   static defaultProps = {
@@ -42,10 +45,10 @@ class App extends React.Component {
   }
 
   render () {
-    const posts = this.props.posts || []
+    const { posts } = this.props
     return (
       <Layout>
-        <div style={{display:'grid', gridTemplateColumns: 'repeat(2, calc(50vw - 60px))', gridGap: '20px', margin: '24px 0px' }}>
+        <div className={styles.grid}>
           {posts.map(post => (
             <PostCard post={post} key={post.id} />
           ))}

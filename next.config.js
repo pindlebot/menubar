@@ -3,6 +3,7 @@ const withSass = require('@zeit/next-sass')
 
 module.exports = withSass({
   distDir: 'dist',
+  cssModules: true,
   onDemandEntries: {
     // period (in ms) where the server will keep pages in the buffer
     maxInactiveAge: 25 * 1000,

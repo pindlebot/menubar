@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Breadcrumb from 'antd/lib/breadcrumb'
 import Card from 'antd/lib/card'
 import Avatar from 'antd/lib/avatar'
+import styles from '../styles/post.scss'
 
 class About extends React.Component {
   render () {
@@ -13,8 +14,8 @@ class About extends React.Component {
           <Breadcrumb.Item><a href={'/'}>Home</a></Breadcrumb.Item>
           <Breadcrumb.Item><Link href={`/about`}><a>About</a></Link></Breadcrumb.Item>
         </Breadcrumb>
-        <div className={'main'}>
-          <h2 className={'post-title'}>About</h2>
+        <div className={styles.main}>
+          <h2>About</h2>
           <div>Coming soon.</div>
         </div>
       </Layout>

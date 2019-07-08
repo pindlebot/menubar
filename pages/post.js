@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { Card, Avatar, Breadcrumb } from 'antd';
 import Layout from '../components/Layout'
+import styles from '../styles/post.scss'
 
 class App extends React.Component {
   static defaultProps = {
@@ -16,9 +17,9 @@ class App extends React.Component {
           <Breadcrumb.Item><a href={'/'}>Home</a></Breadcrumb.Item>
           <Breadcrumb.Item><Link href={`/${post.slug}`}><a>{post.title}</a></Link></Breadcrumb.Item>
         </Breadcrumb>
-        <div className={'main'}>
+        <div className={styles.main}>
           <h2 className={'post-title'}>{post.title}</h2>
-          <div className={'post-content'} dangerouslySetInnerHTML={{ __html: post.document.html }}></div>
+          <div className={styles.content} dangerouslySetInnerHTML={{ __html: post.document.html }}></div>
         </div>
       </Layout>
     )

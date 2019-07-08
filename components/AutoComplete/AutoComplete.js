@@ -6,6 +6,7 @@ import Icon from 'antd/lib/icon'
 import Router from 'next/router'
 import Link from 'next/link'
 import classnames from 'classnames'
+import classes from './styles.scss'
 
 class AutoComplete extends React.Component {
   state = {
@@ -60,13 +61,13 @@ class AutoComplete extends React.Component {
         defaultActiveFirstOption={false}
         onFocus={this.onFocus}
         onBlur={this.onBlur}
-        className={'mb-autocomplete'}
+        className={classes.autocomplete}
       >
         <Input
           className={
             classnames({
-              'mb-focused': this.state.focused,
-              'mb-input': true
+              [classes.focused]: this.state.focused,
+              [classes.input]: true
             })
           }
           suffix={(

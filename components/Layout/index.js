@@ -12,9 +12,10 @@ import Button from 'antd/lib/button'
 import Icon from 'antd/lib/icon'
 import 'isomorphic-fetch'
 import ReactCSSTransitionReplace from 'react-css-transition-replace'
-
+import Dropdown from 'antd/lib/dropdown'
 import Editor from './Editor'
 import AutoComplete from '../AutoComplete'
+import styles from './styles.scss'
 
 const ContactForm = props => {
   return (
@@ -87,39 +88,41 @@ class AppLayout extends React.Component {
     let selectedKeys = typeof window !== 'undefined'
       ? [window.location.pathname]
       : []
+    const menu = (
+      <Menu>
+        <Menu.Item key="/">
+          <a href={'/'}>Home</a>
+        </Menu.Item>
+        <Menu.Item key="/about">
+          <a href={'/about'}>About</a>
+        </Menu.Item>
+        <Menu.Item key="/contact" onClick={this.handleClick}>
+          <a>Contact</a>
+        </Menu.Item>
+        <Menu.Item key={'/projects'}>
+          <a href={'/projects'}>
+            Projects
+          </a>
+        </Menu.Item>
+        <Menu.Item>
+          <a href={'https://github.com/unshift/menubar-next'}>
+            <Icon type="github" />
+          </a>
+        </Menu.Item>
+      </Menu>
+    )
     return (
-      <Layout style={{ height: '100%' }}>
+      <Layout style={{ height: '100%', width: '100%' }}>
         <Layout.Header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '50px' }}>
           <div className="logo">
             <a href={'/'} style={{color: "#fff", marginRight: '15px'}}>Menubar.io</a>
             <AutoComplete />
           </div>
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            selectedKeys={selectedKeys}
-            style={{ lineHeight: '50px' }}
-          >
-            <Menu.Item key="/">
-              <a href={'/'}>Home</a>
-            </Menu.Item>
-            <Menu.Item key="/about">
-              <Link href={'/about'}><a>About</a></Link>
-            </Menu.Item>
-            <Menu.Item key="/contact" onClick={this.handleClick}>
-              <a>Contact</a>
-            </Menu.Item>
-            <Menu.Item key={'/projects'}>
-              <Link href={'/projects'}>
-                Projects
-              </Link>
-            </Menu.Item>
-            <Menu.Item>
-              <a href={'https://github.com/unshift/menubar-next'}><Icon type="github" /></a>
-            </Menu.Item>
-          </Menu>
+          <Dropdown overlay={menu} trigger={['click']}>
+            <a><Icon type="bars" /></a>  
+          </Dropdown>          
         </Layout.Header>
-        <Layout.Content style={{ padding: '0 50px' }}>
+        <Layout.Content className={styles.layout}>
           {this.props.children}
           <Modal
             title="Contact"
