@@ -1,23 +1,23 @@
 .autocomplete {
   :global(.ant-select-selection) {
     border-radius: 0;
-    background-color: #172A3C;
+    // background-color: #172A3C;
 
     .input {
       :global(input.ant-input) {
         border: none;
         border-radius: 0;
         box-shadow: none;
-        color: #fff;
+        // color: #fff;
       }
       :global(.ant-input-suffix i) {
-        color: #fff;
+        // color: #fff;
       }
 
       &.focused {
         :global(input.ant-input) {
           color: rgba(0, 0, 0, 0.65);
-          background-color: #fff;
+          // background-color: #fff;
         }
         :global(.ant-input-suffix i) {
           color: rgba(0, 0, 0, 0.65);

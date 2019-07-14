@@ -2,6 +2,7 @@ const fetch = require('node-fetch')
 const unescape = require('lodash.unescape')
 const aws4 = require('aws4')
 const querystring = require('querystring')
+const crypto = require('crypto')
 
 const {
   BASE_URI,
@@ -22,8 +23,11 @@ const cache = {
   }
 }
 
+const hash = (key) => crypto.createHash('md5').update(key).digest('hex')
+
 const createFetch = async ({ query, variables }) => {
-  let json = await cache.get(query)
+  const key = hash(query)
+  let json = await cache.get(key)
   if (!json) {
     let url = GRAPHQL_ENDPOINT
     let body = JSON.stringify({
@@ -40,7 +44,7 @@ const createFetch = async ({ query, variables }) => {
       body: body
     })
     json = await resp.json()
-    await cache.set(query, json)
+    await cache.set(key, json)
   }
 
   return json

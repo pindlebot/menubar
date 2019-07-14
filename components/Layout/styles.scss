@@ -1,4 +1,51 @@
-.layout {
+.root:global(.ant-layout) {
+  background-color: #fafafa;
+}
+
+.root {
+  height: 100%;
+  width: 100%;
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    background-color: #fff;
+    color: #111;
+    border: none;
+    box-shadow: 0px 6px 20px rgba(83, 29, 171, 0.06);
+
+    .brand {
+      color: #111;
+      margin-right: 15px;
+    }
+  }
+
+  .footer:global(.ant-layout-footer) {
+    margin-top: 40px;
+    background-color: #fff;
+    text-align: center;
+  }
+
+  .menu {
+    color: #531dab;
+  }
+}
+
+.content:global(.ant-layout-content) {
   padding: 0 50px;
   width: 100%;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.65;
+  font-family: -apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu', 'Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  min-width: 320px;
+  direction: ltr;
+  font-feature-settings: 'kern';
+  text-rendering: optimizeLegibility;
+  color: #111;
 }

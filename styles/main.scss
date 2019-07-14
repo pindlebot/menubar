@@ -1,18 +1,28 @@
 @import url("https://rsms.me/inter/inter-ui.css");
 
 :global(body) {
-  line-height: 1.6;
-  font-size: 16px;
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.65;
+  font-family: -apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu', 'Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  min-width: 320px;
+  direction: ltr;
+  font-feature-settings: 'kern';
+  text-rendering: optimizeLegibility;
 }
 
 :global(pre) {
   padding: 10px;
-  border: 1px solid #ebedf0;
+  // border: 1px solid #ebedf0;
   font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
-  font-size: 12px;
+  background-color: #fafafa;
+
+  code {
+    font-size: 12px;
+  }
 }
 
 :global(.trix-button-group--history-tools) {

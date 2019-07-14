@@ -21,7 +21,7 @@ function formatDate (dateString) {
 
 function PostCard ({ post }) {
   return (
-    <Card>
+    <Card className={styles.card}>
       <Card.Meta
         avatar={<Avatar src="https://avatars3.githubusercontent.com/u/19880087" />}
         title={
