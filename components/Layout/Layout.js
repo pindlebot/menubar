@@ -21,6 +21,26 @@ const menuItems = [
 
 ]
 
+const Bars = () => (
+  <svg
+    aria-hidden="true"
+    focusable="false"
+    data-prefix="fal"
+    data-icon="bars"
+    role="img"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 448 512"
+    width={24}
+    height={24}
+    style={{
+      display: 'block',
+      margin: '0 10px'
+    }}
+  >
+    <path fill="#fff" d="M442 114H6a6 6 0 0 1-6-6V84a6 6 0 0 1 6-6h436a6 6 0 0 1 6 6v24a6 6 0 0 1-6 6zm0 160H6a6 6 0 0 1-6-6v-24a6 6 0 0 1 6-6h436a6 6 0 0 1 6 6v24a6 6 0 0 1-6 6zm0 160H6a6 6 0 0 1-6-6v-24a6 6 0 0 1 6-6h436a6 6 0 0 1 6 6v24a6 6 0 0 1-6 6z"></path>
+  </svg>
+)
+
 class AppLayout extends React.Component {
   state = {
     visible: false,
@@ -97,10 +117,10 @@ class AppLayout extends React.Component {
           <div>
             <a href={'/'} className={styles.brand}>Menubar.io</a>
           </div>
-          <div>
+          <div style={{ flexBasis: '30%', display: 'flex', flexDirection: 'row', justifyContent:'flex-end', alignItems: 'center' }}>
             <AutoComplete />
             <Dropdown overlay={menu} trigger={['click']}>
-              <a><Icon type='bars' className={styles.menu} /></a>  
+              <a><Bars /></a>  
             </Dropdown>
           </div>
         </Layout.Header>

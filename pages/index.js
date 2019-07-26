@@ -6,6 +6,7 @@ import Avatar from 'antd/lib/avatar'
 import Pagination from 'antd/lib/pagination'
 import Layout from '../components/Layout'
 import styles from '../styles/index.scss'
+import Tag from 'antd/lib/tag'
 
 function formatDate (dateString) {
   if (!dateString) return ''
@@ -19,18 +20,34 @@ function formatDate (dateString) {
   ].join('/')
 }
 
-function PostCard ({ post }) {
+function PostCard (post) {
+  console.log(post)
   return (
     <Card className={styles.card}>
       <Card.Meta
-        avatar={<Avatar src="https://avatars3.githubusercontent.com/u/19880087" />}
+        avatar={<Avatar size={'large'} src="https://avatars3.githubusercontent.com/u/19880087" />}
         title={
           <Link href={`/${post.slug}`}><a>{post.title}</a></Link>
         }
-        description={formatDate(post.publishedAt)}
+        description={
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'fkex-start' }}>
+            <div style={{ marginRight: 15 }}>
+              {formatDate(post.publishedAt)}
+            </div>
+            <div>
+              {post.tags.map(tag => <Tag color={'geekblue'} key={tag.id} style={{ marginRight: 15 }}>{tag.name}</Tag>)}
+            </div>
+          </div>
+        }
       />
     </Card>
   )
+}
+PostCard.defaultProps = {
+  slug: '',
+  title: '',
+  publishedAt: '',
+  tags: []
 }
 
 class App extends React.Component {
@@ -50,7 +67,7 @@ class App extends React.Component {
       <Layout>
         <div className={styles.grid}>
           {posts.map(post => (
-            <PostCard post={post} key={post.id} />
+            <PostCard {...post} key={post.id} />
           ))}
         </div>
         <Pagination

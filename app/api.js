@@ -84,9 +84,9 @@ module.exports.sendEmail = (params) => {
 }
 
 module.exports.fetchPage = (req, res) => {
-  let params = req.params || {}
-  let page = parseInt(params.page || 0)
-  let offset = page * 10
+  const params = req.params || {}
+  const page = parseInt(params.page || 0)
+  const offset = page * 10
   return createFetch({
     query: `{
       feed(limit: 10, offset: ${offset}, projectId: "${PROJECT_ID}") {
@@ -98,6 +98,10 @@ module.exports.fetchPage = (req, res) => {
           publishedAt
           createdAt
           excerpt
+          tags {
+            name
+            id
+          }
         }
       }
     }`
@@ -127,6 +131,10 @@ module.exports.fetchPost = (req, res) => {
         publishedAt
         createdAt
         excerpt
+        tags {
+          name
+          id
+        }
         document {
           encodedHtml
           html

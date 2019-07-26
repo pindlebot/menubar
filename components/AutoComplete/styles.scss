@@ -1,7 +1,9 @@
 .autocomplete {
+  
   :global(.ant-select-selection) {
-    border-radius: 0;
-    // background-color: #172A3C;
+    border-radius: 5px;
+    margin-right: 10px;
+    // background-color: #C1F2FE;
 
     .input {
       :global(input.ant-input) {

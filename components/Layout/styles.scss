@@ -1,5 +1,7 @@
+@import '../../styles/colors.scss';
+
 .root:global(.ant-layout) {
-  background-color: #fafafa;
+  background-color: $white-smoke;
 }
 
 .root {
@@ -10,15 +12,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 50px;
-    background-color: #fff;
-    color: #111;
+    height: 60px;
+    background-color: $majorelle-blue;
+    color: #fff;
     border: none;
     box-shadow: 0px 6px 20px rgba(83, 29, 171, 0.06);
 
     .brand {
-      color: #111;
-      margin-right: 15px;
+      color: $electric-blue;
+      margin-right: 17px;
+      font-weight: 700;
     }
   }
 
@@ -29,7 +32,9 @@
   }
 
   .menu {
-    color: #531dab;
+    color: #fff;
+    width: 36px;
+    height: 36px;
   }
 }
 

@@ -1,4 +1,5 @@
 @import url("https://rsms.me/inter/inter-ui.css");
+@import './colors.scss';
 
 :global(body) {
   margin: 0;
@@ -12,13 +13,13 @@
   direction: ltr;
   font-feature-settings: 'kern';
   text-rendering: optimizeLegibility;
+  height: auto;
 }
 
 :global(pre) {
   padding: 10px;
-  // border: 1px solid #ebedf0;
   font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
-  background-color: #fafafa;
+  background-color: $snow;
 
   code {
     font-size: 12px;

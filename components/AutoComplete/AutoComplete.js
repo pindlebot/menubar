@@ -53,7 +53,7 @@ class AutoComplete extends React.Component {
     return(
       <AntDAutoComplete
         dataSource={this.state.dataSource}
-        style={{ width: 200 }}
+        style={{ width: 300 }}
         onSelect={this.onSelect}
         onSearch={this.handleSearch}
         placeholder="search"
