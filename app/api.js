@@ -29,13 +29,12 @@ const createFetch = async ({ query, variables }) => {
   const key = hash(query)
   let json = await cache.get(key)
   if (!json) {
-    let url = GRAPHQL_ENDPOINT
-    let body = JSON.stringify({
+    const body = JSON.stringify({
       operationName: null,
       query: query,
       variables: variables || {}
     })
-    const resp = await fetch(url, {
+    const resp = await fetch(GRAPHQL_ENDPOINT, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${TOKEN}`,
@@ -129,18 +128,31 @@ module.exports.fetchPost = (req, res) => {
         createdAt
         excerpt
         document {
+          encodedHtml
           html
         }
       }
     }`
   })
     .then(({ data }) => {
-      data.post.document.html = unescape(data.post.document.html)
-      data.meta = {}
-      data.meta.canonical = `${BASE_URI}${slug}`
-      data.meta.title = data.post.title
-      data.meta.excerpt = data.post.excerpt
-      return data
+      console.log(data)
+      return {
+        ...data,
+        post: {
+          ...data.post,
+          document: {
+            ...data.post.document,
+            html: data.post.document.encodedHtml
+              ? Buffer.from(data.post.document.encodedHtml, 'base64').toString('utf8')
+              : unescape(data.post.document.html)
+          }
+        },
+        meta: {
+          canonical: `${BASE_URI}${slug}`,
+          title: data.post.title,
+          excerpt: data.post.excerpt
+        }
+      }
     })
 }
 
