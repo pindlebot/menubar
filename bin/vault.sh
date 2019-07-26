@@ -8,6 +8,6 @@ curl -d '{ "ttl": "600s" }' \
   https://vault.contentkit.co/v1/aws/creds/ApexUp \
   | jq -r '.data | "[default]\naws_access_key_id = \(.access_key)\naws_secret_access_key = \(.secret_key)"' > ~/.aws/credentials
 
-VAULT_DATA=$(curl -H "X-Vault-Token: $VAULT_TOKEN" https://vault.contentkit.co/v1/kv/data/menubar/env | jq -r '.data.data.value')
+VAULT_DATA=$(curl -H "X-Vault-Token: $VAULT_TOKEN" https://vault.contentkit.co/v1/kv/data/menubar | jq -r '.data.data.value')
 
 echo "$VAULT_DATA" | jq -r 'keys[] as $k | "\($k)=\(.[$k])"' > .env
