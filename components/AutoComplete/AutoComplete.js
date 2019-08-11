@@ -65,7 +65,7 @@ class AutoComplete extends React.Component {
       >
         <Input
           style={{
-            borderRadius: 0
+            // borderRadius: 2
           }}
           className={
             classnames({

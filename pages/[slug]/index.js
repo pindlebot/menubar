@@ -6,8 +6,6 @@ import styles from '../../styles/post.scss'
 
 class App extends React.Component {
   static defaultProps = {
-    page: 1,
-    next: 2,
     post: {}
   }
   render () {
@@ -23,8 +21,8 @@ class App extends React.Component {
           </Breadcrumb.Item>
         </Breadcrumb>
         <div className={styles.main}>
-          <h2 className={'post-title'}>{post.title}</h2>
-          <div className={styles.content} dangerouslySetInnerHTML={{ __html: post.content }}></div>
+          <h2>{post.title}</h2>
+          <div className={styles.content} dangerouslySetInnerHTML={{ __html: post.content }} />
         </div>
       </Layout>
     )

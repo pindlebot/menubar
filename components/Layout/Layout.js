@@ -10,12 +10,12 @@ import Input from 'antd/lib/input'
 import Modal from 'antd/lib/modal'
 import Button from 'antd/lib/button'
 import Icon from 'antd/lib/icon'
-import 'isomorphic-fetch'
 import ReactCSSTransitionReplace from 'react-css-transition-replace'
 import Dropdown from 'antd/lib/dropdown'
 import AutoComplete from '../AutoComplete'
 import styles from './styles.scss'
 import ContactForm from '../ContactForm'
+import 'isomorphic-fetch'
 
 const menuItems = [
 

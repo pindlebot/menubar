@@ -1,13 +1,14 @@
 .autocomplete {
+  // border-radius: 2px;
 
   :global(.ant-select-selection) {
-    border-radius: unset;
+    // border-radius: unset;
     margin-right: 10px;
 
     .input {
       :global(input.ant-input) {
         border: none;
-        border-radius: 0;
+        // border-radius: 2px;
         box-shadow: none;
       }
       :global(.ant-input-suffix i) {}

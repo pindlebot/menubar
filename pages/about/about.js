@@ -1,8 +1,8 @@
 import React from 'react'
-import Layout from '../components/Layout'
+import Layout from '../../components/Layout'
 import Link from 'next/link'
 import Breadcrumb from 'antd/lib/breadcrumb'
-import styles from '../styles/post.scss'
+import styles from '../../styles/post.scss'
 
 class About extends React.Component {
   render () {

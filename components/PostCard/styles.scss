@@ -3,8 +3,19 @@
 .card:global(.ant-card) {
   border: 1px solid $white-smoke;
   box-shadow: rgba(8, 35, 51, 0.03) 0px 0px 2px, rgba(8, 35, 51, 0.05) 0px 3px 6px;
+  display: flex;
+  flex-direction: column;
 
   :global(.ant-card-meta-title) {
     font-size: 20px;
+    white-space: unset;
+  }
+
+  :global(.ant-card-body) {
+    height: calc(100% - 40px);
+  }
+
+  :global(.card-actions) {
+    height: 40px;
   }
 }

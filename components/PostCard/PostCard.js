@@ -4,7 +4,7 @@ import Card from 'antd/lib/card'
 import Avatar from 'antd/lib/avatar'
 import styles from './styles.scss'
 import Tag from 'antd/lib/tag'
-import Button from 'antd/lib/button'
+import Icon from 'antd/lib/icon'
 
 function formatDate (dateString) {
   if (!dateString) return ''
@@ -25,7 +25,7 @@ function PostCard (post) {
     <Card
       className={styles.card}
       actions={[
-        
+        <Icon type='heart' />
       ]}
     >
       <Card.Meta
