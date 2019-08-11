@@ -22,14 +22,14 @@ const {
 app.prepare().then(async () => {
   const server = express()
   server.post('/send', bodyParser.json(), async (req, res) => {
-    const body = req.body
+    const { body } = req
     await sendEmail(body)
     res.status(200).json({})
   })
 
   server.post('/search', bodyParser.json(), async (req, res) => {
     const body = req.body
-    let data = await createFetch({
+    const data = await createFetch({
       query: `{
         feed(projectId: "${PROJECT_ID}", query: "${body.query}") {
           posts {
@@ -44,7 +44,7 @@ app.prepare().then(async () => {
   })
 
   server.post('/api/projects', bodyParser.json(), async (req, res) => {
-    let repositories = await fetchRepositories(req.body)
+    const repositories = await fetchRepositories(req.body)
     res.status(200).json({ repositories })
   })
 
@@ -71,7 +71,7 @@ app.prepare().then(async () => {
       return next()
     }
     const props = await fetchPost(req, res)
-    return app.render(req, res, '/post', { params: req.params, ...props })
+    return app.render(req, res, '/:slug', { params: req.params, ...props })
   })
 
   server.get('*', (req, res) => {

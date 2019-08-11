@@ -64,6 +64,9 @@ class AutoComplete extends React.Component {
         className={classes.autocomplete}
       >
         <Input
+          style={{
+            borderRadius: 0
+          }}
           className={
             classnames({
               [classes.focused]: this.state.focused,

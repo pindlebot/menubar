@@ -35,7 +35,7 @@ class Projects extends React.Component {
   }
 
   render () {
-    const repositories = this.props.repositories || {}
+    const { repositories } = this.props
     return (
       <Layout>
         <div 

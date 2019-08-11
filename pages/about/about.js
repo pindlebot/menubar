@@ -2,8 +2,6 @@ import React from 'react'
 import Layout from '../components/Layout'
 import Link from 'next/link'
 import Breadcrumb from 'antd/lib/breadcrumb'
-import Card from 'antd/lib/card'
-import Avatar from 'antd/lib/avatar'
 import styles from '../styles/post.scss'
 
 class About extends React.Component {

@@ -19,7 +19,7 @@
 :global(pre) {
   padding: 10px;
   font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
-  background-color: $snow;
+  background-color: $white-smoke;
 
   code {
     font-size: 12px;
@@ -71,10 +71,6 @@
 :global(#next) {
   height: 100%;
   width: 100%;
-}
-
-:global(.ant-layout) {
-  height: 100vh;
 }
 
 @media (min-width: 1025px) {

@@ -3,6 +3,7 @@ const unescape = require('lodash.unescape')
 const aws4 = require('aws4')
 const querystring = require('querystring')
 const crypto = require('crypto')
+const redis = require('redis')
 
 const {
   BASE_URI,
@@ -10,9 +11,11 @@ const {
   TOKEN,
   GRAPHQL_ENDPOINT,
   SES_SOURCE_ARN,
-  SES_DESTINATION_ADDRESS
+  SES_DESTINATION_ADDRESS,
+  REDIS_URL
 } = process.env
-const client = require('redis').createClient(process.env.REDIS_URL)
+
+const client = redis.createClient(REDIS_URL)
 
 const cache = {
   get (key) {
@@ -69,7 +72,7 @@ module.exports.sendEmail = (params) => {
       SourceArn: SES_SOURCE_ARN
     })
   }
-  let signed = aws4.sign(opts, {
+  const signed = aws4.sign(opts, {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
   })
@@ -107,9 +110,9 @@ module.exports.fetchPage = (req, res) => {
     }`
   })
     .then(({ data }) => {
-      let next = page + 1
-      let prev = Math.max(1, page - 1)
-      let props = {}
+      const next = page + 1
+      const prev = Math.max(1, page - 1)
+      const props = {}
       props.posts = data.feed.posts
       props.page = page
       props.next = next
@@ -131,29 +134,19 @@ module.exports.fetchPost = (req, res) => {
         publishedAt
         createdAt
         excerpt
-        tags {
-          name
-          id
-        }
-        document {
-          encodedHtml
-          html
-        }
+        encodedHtml
+        html
       }
     }`
   })
     .then(({ data }) => {
-      console.log(data)
       return {
         ...data,
         post: {
           ...data.post,
-          document: {
-            ...data.post.document,
-            html: data.post.document.encodedHtml
-              ? Buffer.from(data.post.document.encodedHtml, 'base64').toString('utf8')
-              : unescape(data.post.document.html)
-          }
+          content: data.post.encodedHtml
+            ? Buffer.from(data.post.encodedHtml, 'base64').toString('utf8')
+            : unescape(data.post.html)
         },
         meta: {
           canonical: `${BASE_URI}${slug}`,

@@ -146,7 +146,7 @@ class AppLayout extends React.Component {
           </Modal>
         </Layout.Content>
         <Layout.Footer className={styles.footer}>
-          🌵
+          Menubar
         </Layout.Footer>
       </Layout>
     )
