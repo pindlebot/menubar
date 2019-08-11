@@ -4,11 +4,11 @@ import Router from 'next/router'
 import Card from 'antd/lib/card'
 import Avatar from 'antd/lib/avatar'
 import Pagination from 'antd/lib/pagination'
-import Layout from '../../components/Layout'
-import styles from './styles.scss'
+import Layout from '../components/Layout'
+import styles from './index.scss'
 import Tag from 'antd/lib/tag'
 import Button from 'antd/lib/button'
-import PostCard from '../../components/PostCard'
+import PostCard from '../components/PostCard'
 
 class App extends React.Component {
   static defaultProps = {

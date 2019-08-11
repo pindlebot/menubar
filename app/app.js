@@ -21,6 +21,14 @@ const {
 
 app.prepare().then(async () => {
   const server = express()
+  server.get((req, res, next) => {
+    if (req.url === '/favicon.ico') {
+      return res.send('')
+    }
+
+    next()
+  })
+
   server.post('/send', bodyParser.json(), async (req, res) => {
     const { body } = req
     await sendEmail(body)
@@ -63,6 +71,8 @@ app.prepare().then(async () => {
   })
 
   server.get('/:slug', async (req, res, next) => {
+    console.log(req.params)
+
     const slug = req.params.slug
     if (slug === 'favicon.ico') {
       return res.status(204).json({})
@@ -71,6 +81,7 @@ app.prepare().then(async () => {
       return next()
     }
     const props = await fetchPost(req, res)
+    console.log(props)
     return app.render(req, res, '/:slug', { params: req.params, ...props })
   })
 

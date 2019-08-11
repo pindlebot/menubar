@@ -1,8 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
-import { Card, Avatar, Breadcrumb } from 'antd';
-import Layout from '../../components/Layout'
-import styles from '../../styles/post.scss'
+import { Card, Avatar, Breadcrumb } from 'antd'
+import Layout from '../components/Layout'
+import styles from '../styles/post.scss'
 
 class App extends React.Component {
   static defaultProps = {
@@ -10,6 +10,7 @@ class App extends React.Component {
   }
   render () {
     const { post } = this.props
+    console.log(this.props)
     return (
       <Layout>
         <Breadcrumb style={{ margin: '16px 0' }}>

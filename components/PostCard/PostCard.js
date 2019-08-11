@@ -20,7 +20,12 @@ function formatDate (dateString) {
 
 function PostCard (post) {
   const avatar = (<Avatar size={'large'} src="https://avatars3.githubusercontent.com/u/19880087" />)
-  const title = (<Link href={`/${post.slug}`}><a>{post.title}</a></Link>)
+  const title = (
+    <Link
+      href={{ pathname: `/${post.slug}`, query: { slug: post.slug } }}
+    ><a>{post.title}</a>
+    </Link>
+  )
   return (
     <Card
       className={styles.card}
