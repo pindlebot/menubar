@@ -5,6 +5,7 @@ import Skeleton from 'antd/lib/skeleton'
 import Icon from 'antd/lib/icon'
 import Avatar from 'antd/lib/avatar'
 import Tag from 'antd/lib/tag'
+import classes from './styles.scss'
 
 class Repo extends React.Component {
   static defaultProps = {
@@ -29,6 +30,19 @@ class Repo extends React.Component {
       resourcePath,
       languages
     } = this.props
+    // return (
+    //   <div className={classes.card}>
+    //     <header className={classes.header}>
+
+    //     </header>
+    //     <div className={classes.content}>
+          
+    //     </div>
+    //     <div className={classes.actions}>
+
+    //     </div>
+    //   </div>
+    // )
     return (
       <Card
         actions={[

@@ -13,23 +13,5 @@
   @media (min-width: 601px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
-
-  a {
-    color: $majorelle-blue;
-  }
-
-  a:hover {
-    color: #391085;
-  }
-}
-
-.card:global(.ant-card) {
-  border: 1px solid $white-smoke;
-  box-shadow: rgba(8, 35, 51, 0.03) 0px 0px 2px, rgba(8, 35, 51, 0.05) 0px 3px 6px;
-
-  :global(.ant-card-meta-title) {
-    font-size: 20px;
-  }
 }
 

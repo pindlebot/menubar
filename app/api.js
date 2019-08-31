@@ -135,7 +135,6 @@ module.exports.fetchPost = (req, res) => {
         createdAt
         excerpt
         encodedHtml
-        html
       }
     }`
   })
