@@ -1,23 +1,5 @@
-.main {
-  min-height: calc(100vh - 173px);
-  border-radius: 4px;
-
-  a {
-
-  }
-
-  a:hover {
-
-  }
-}
-
-.content img {
-  max-width: 100%;
-  margin-bottom: 1em;
-}
-
 .breadcrumb {
-  margin: 0;
+  margin: 0 0 20px 0;
   padding: 0;
 
   .breadcrumbItem:not(:last-child):after {
@@ -29,9 +11,10 @@
   .breadcrumbItem {
     display: inline;
     padding-right: 10px;
+    font-size: 14px;
   
     a {
-      color: #624de3;
+      color: rgba(0, 0, 0, 0.45);
     }
   }
 }

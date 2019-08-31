@@ -1,14 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
-import Card from 'antd/lib/card'
-import Avatar from 'antd/lib/avatar'
-import Pagination from 'antd/lib/pagination'
 import Layout from '../components/Layout'
 import styles from './index.scss'
-import Tag from 'antd/lib/tag'
-import Button from 'antd/lib/button'
 import PostCard from '../components/PostCard'
+
+const pages = [1,2,3,4,5]
 
 class App extends React.Component {
   static defaultProps = {
@@ -22,7 +19,7 @@ class App extends React.Component {
   }
 
   render () {
-    const { posts } = this.props
+    const { posts, prev, next } = this.props
     return (
       <Layout>
         <div className={styles.grid}>
@@ -30,13 +27,10 @@ class App extends React.Component {
             <PostCard {...post} key={post.id} />
           ))}
         </div>
-        <Pagination
-          defaultCurrent={1}
-          pageSize={10}
-          total={50}
-          current={this.props.page || 1}
-          onChange={this.handlePageChange}
-        />
+        <div className={styles.pagination}>
+          <button onClick={evt => this.handlePageChange(prev)}>Prev</button>
+          <button onClick={evt => this.handlePageChange(next)}>Next</button>
+        </div>
       </Layout>
     )
   }

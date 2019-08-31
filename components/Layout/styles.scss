@@ -1,56 +1,47 @@
-@import '../../styles/colors.scss';
-
-.root:global(.ant-layout) {
-  background-color: $snow;
-}
 
 .root {
-  height: 100%;
   width: 100%;
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 60px;
-    background-color: #000000;
-    color: #fff;
-    border: none;
-    box-shadow: 0px 6px 20px rgba(83, 29, 171, 0.06);
+  height: 100%;
+}
 
-    .brand {
-      color: #fff;
-      margin-right: 16px;
-    }
-  }
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0px;
+  max-width: 960px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  height: 80px;
+  color: rgba(20,20,20,0.64);
+}
 
-  .footer:global(.ant-layout-footer) {
-    margin-top: 40px;
-    background-color: #000000;
-    text-align: center;
-    color: #fff;
-  }
-
-  .menu {
-    color: #fff;
-    width: 36px;
-    height: 36px;
+.brand {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 40px;
+  a {
+    color: #141414;
   }
 }
 
-.content:global(.ant-layout-content) {
-  // padding: 0 50px;
-  width: 100%;
+.content {
   max-width: 960px;
   margin: 0 auto;
-  --webkit-font-smoothing: antialiased;
-  line-height: 1.65;
-  font-family: -apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu', 'Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  min-width: 320px;
-  direction: ltr;
-  font-feature-settings: 'kern';
-  text-rendering: optimizeLegibility;
-  color: #111;
+}
+
+.nav {
+  ul li {
+    display: inline;
+    margin: 0 10px;
+    line-height: 40px;
+    background-color: #efedfc;
+    padding: 8px 12px;
+    border-radius: 3px;
+  }
+}
+
+footer {
+  background-color: #190933;
+  height: 100px;
+  width: 100%;
 }
