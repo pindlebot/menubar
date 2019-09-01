@@ -95,12 +95,16 @@ module.exports.fetchPage = (req, res) => {
       feed(limit: 10, offset: ${offset}, projectId: "${PROJECT_ID}") {
         count
         posts {
-          id,
+          id
           title
           slug
           publishedAt
           createdAt
           excerpt
+          coverImage {
+            id
+            url
+          }
           tags {
             name
             id
@@ -135,6 +139,9 @@ module.exports.fetchPost = (req, res) => {
         createdAt
         excerpt
         encodedHtml
+        coverImage {
+          url
+        }
       }
     }`
   })

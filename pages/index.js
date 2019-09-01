@@ -20,6 +20,7 @@ class App extends React.Component {
 
   render () {
     const { posts, prev, next } = this.props
+    console.log(posts)
     return (
       <Layout>
         <div className={styles.grid}>
