@@ -82,7 +82,7 @@ export default class extends React.Component {
     let variables = forward
       ? { first: 9, after: pageInfo.endCursor }
       : { last: 9, before: pageInfo.startCursor }
-    let { repositories } = await fetch('https://menubar.io/api/projects', {
+    let { repositories } = await fetch('http://localhost:3000/api/projects', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
