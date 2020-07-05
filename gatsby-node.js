@@ -73,7 +73,7 @@ exports.createPages = async ({ actions, graphql }) => {
 
   actions.createPage({
     path: '/',
-    component: path.resolve(`./src/pages/index.tsx`),
+    component: path.resolve(`./src/templates/Page.tsx`),
     context: {
       searchData,
       page: 0,
@@ -87,7 +87,7 @@ exports.createPages = async ({ actions, graphql }) => {
     const offset = page * 5
     actions.createPage({
       path: `/page/${page}`,
-      component: path.resolve(`./src/pages/index.tsx`),
+      component: path.resolve(`./src/templates/Page.tsx`),
       context: {
         searchData,
         page: page,

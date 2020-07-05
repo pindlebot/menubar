@@ -1,9 +1,7 @@
-import { graphql } from 'gatsby'
 import { Paper, Typography } from '@material-ui/core'
 import React from 'react'
 import Layout from './Layout'
 import { makeStyles } from '@material-ui/styles'
-import format from 'date-fns/format'
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -27,7 +25,7 @@ function Post (props) {
   const { pageContext, pageContext: { post } } = props
 
   return (
-    <Layout pageContext={pageContext}>
+    <Layout searchData={pageContext.searchData}>
       <Paper className={classes.paper}>
         <Typography variant='h1' className={classes.title}>{post.title}</Typography>
         <Typography variant='subtitle1' className={classes.subheader}>
@@ -37,6 +35,10 @@ function Post (props) {
       </Paper>
     </Layout>
   )
+}
+
+Post.defaultProps = {
+  pageContext: {}
 }
 
 

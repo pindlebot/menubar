@@ -161,7 +161,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function Layout (props) {
-  const { pageContext } = props
+  const { searchData } = props
   const classes = useStyles(props)
   const { children } = props
   return (
@@ -174,7 +174,7 @@ function Layout (props) {
             <Typography className={classes.brand}>
               <Link to='/'>MenuBar</Link>
             </Typography>
-            <Search options={pageContext.searchData} />
+            <Search options={searchData} />
           </Toolbar>
         </Container>
       </AppBar>
@@ -184,6 +184,10 @@ function Layout (props) {
       </Container>
     </>
   )
+}
+
+Layout.defaultProps = {
+  searchData: []
 }
 
 export default Layout

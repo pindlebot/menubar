@@ -1,7 +1,7 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
-import { Collapse, Typography, Avatar, IconButton, Card, CardHeader, CardContent, CardActions } from '@material-ui/core'
-import { MoreVert } from '@material-ui/icons'
+import { Link } from 'gatsby'
+import { Collapse, Typography, Avatar, IconButton, Card, CardHeader, CardContent } from '@material-ui/core'
+import { ExpandMore, ExpandLess } from '@material-ui/icons'
 import Layout from '../components/Layout'
 import { makeStyles } from '@material-ui/styles'
 import Pagination from '@material-ui/lab/Pagination'
@@ -49,8 +49,8 @@ function Entry (props) {
           </Typography>
         )}
         action={
-          <IconButton aria-label="settings" onClick={toggleExpand}>
-            <MoreVert />
+          <IconButton aria-label='settings' onClick={toggleExpand}>
+            {expanded ? <ExpandLess /> : <ExpandMore />}
           </IconButton>
         }
         disableTypography
@@ -64,10 +64,12 @@ function Entry (props) {
   )
 }
 
-function Index (props) {
-  const { pageContext, pageContext: { page, nodes } } = props
+function Page (props) {
+  const { pageContext } = props
+  const nodes = pageContext?.nodes || []
+  const page = pageContext?.page || 1
   return (
-    <Layout pageContext={pageContext}>
+    <Layout searchData={pageContext.searchData}>
       {
         nodes.map(post => <Entry key={post.id} {...post} />)
       }
@@ -86,7 +88,10 @@ function Index (props) {
   )
 }
 
+Page.defaultProps = {
+  pageContext: {}
+}
 
-export default Index
+export default Page
 
 
