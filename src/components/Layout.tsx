@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import { Breadcrumbs, Typography, AppBar, Toolbar, Container, CssBaseline } from '@material-ui/core'
+import { Typography, AppBar, Toolbar, Container, CssBaseline } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
-import { createMuiTheme } from '@material-ui/core/styles'
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/styles'
+import Search from './Search'
+import SEO from './SEO'
 
 const prism = {
   'code[class*=language-],pre[class*=language-],pre[class*=language-] code': {
@@ -97,6 +97,50 @@ const prism = {
 }
 
 const useStyles = makeStyles(theme => ({
+  '@global': {
+    body: {
+      backgroundColor: 'rgb(247, 250, 252)',
+      fontFamily: [
+        '-apple-system',
+        'BlinkMacSystemFont',
+        '"Segoe UI"',
+        'Roboto',
+        '"Helvetica Neue"',
+        'Arial',
+        'sans-serif',
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"'
+      ].join(',')
+    },
+    p: {
+      lineHeight: '24px',
+      fontSize: 16,
+      fontStyle: 'normal',
+
+    },
+    img: {
+      maxWidth: '660px'
+    },
+    pre: {
+      backgroundColor: '#f6f8fa',
+      padding: 20,
+      borderRadius: 8
+    },
+    a: {
+      color: '#3182ce',
+      textDecoration: 'none',
+      '&:visited': {
+        color: '#3182ce',
+      }
+    },
+    ':not(pre) > code': {
+      color: 'rgb(26, 32, 44)',
+      backgroundColor: 'rgb(237, 242, 247)',
+      padding: '0.05em 0.3em 0.2em'
+    },
+    ...prism
+  },
   brand: {
     flexGrow: 1,
     '& > a': {
@@ -116,89 +160,29 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const variables = {
-  primaryColor: '#15bd76',
-  secondaryColor: '#3182ce'
-}
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: variables.primaryColor
-    },
-    secondary: {
-      main: variables.secondaryColor
-    },
-    text: {
-      primary: '#1a202c',
-      secondary: '#3d556b',
-    }
-  },
-  typography: {
-    fontSize: 14,
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"'
-    ].join(',')
-  },
-  overrides: {
-    MuiCssBaseline: {
-      '@global': {
-        body: {
-          backgroundColor: 'rgb(247, 250, 252)'
-        },
-        img: {
-          maxWidth: '660px'
-        },
-        pre: {
-          backgroundColor: '#f6f8fa',
-          padding: 20,
-          borderRadius: 8
-        },
-        a: {
-          color: '#3182ce',
-          textDecoration: 'none',
-          '&:visited': {
-            color: '#3182ce',
-          }
-        },
-        ':not(pre) > code': {
-          color: 'rgb(26, 32, 44)',
-          backgroundColor: 'rgb(237, 242, 247)',
-          padding: '0.05em 0.3em 0.2em'
-        },
-        ...prism
-      }
-    }
-  }
-})
-
 function Layout (props) {
+  const { pageContext } = props
   const classes = useStyles(props)
   const { children } = props
   return (
-    <MuiThemeProvider theme={theme}>
+    <>
+      <SEO />
       <CssBaseline />
       <AppBar position='static' className={classes.appBar}>
-        <Toolbar variant='dense'>
-          <Typography className={classes.brand}>
-            <Link to='/'>MenuBar</Link>
-          </Typography>
-        </Toolbar>
+        <Container maxWidth="md">
+          <Toolbar disableGutters>
+            <Typography className={classes.brand}>
+              <Link to='/'>MenuBar</Link>
+            </Typography>
+            <Search options={pageContext.searchData} />
+          </Toolbar>
+        </Container>
       </AppBar>
 
       <Container className={classes.container} maxWidth="md">
         {children}
       </Container>
-    </MuiThemeProvider>
+    </>
   )
 }
 

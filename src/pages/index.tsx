@@ -28,14 +28,15 @@ const useStyles = makeStyles(theme => ({
 function Entry (props) {
   const [expanded, setExpaded] = React.useState(false)
   const classes = useStyles(props)
-  const { id, image, title, slug, published_at, excerpt } = props
+  const { avatar, id, title, slug, date, excerpt } = props
 
   const toggleExpand = () => setExpaded(exp => !exp)
+
   return (
     <Card className={classes.card}>
       <CardHeader
         avatar={(
-          <Avatar src={`https://s3.amazonaws.com/contentkit/${image.url}`} />
+          <Avatar src={avatar} />
         )}
         title={(
           <Typography variant='h3' className={classes.title}> 
@@ -44,7 +45,7 @@ function Entry (props) {
         )}
         subheader={(
           <Typography variant='subtitle1' className={classes.subheader}>
-            {published_at}
+            {date}
           </Typography>
         )}
         action={
@@ -64,12 +65,11 @@ function Entry (props) {
 }
 
 function Index (props) {
-  const { data, pageContext: { page } } = props
-  const posts = data?.cms?.posts_aggregate.nodes || []
+  const { pageContext, pageContext: { page, nodes } } = props
   return (
-    <Layout>
+    <Layout pageContext={pageContext}>
       {
-        posts.map(post => <Entry key={post.id} {...post} />)
+        nodes.map(post => <Entry key={post.id} {...post} />)
       }
       <Pagination
         page={page}
@@ -85,47 +85,6 @@ function Index (props) {
     </Layout>
   )
 }
-
-export const query = graphql`
-  query($offset: Int) {
-    cms {
-      posts_aggregate(
-        where: {
-          project_id: {
-            _eq: "cjepisl57j98v0199y8k65bb8"
-          }
-        }
-        order_by: {
-          published_at: desc_nulls_last
-        }
-        limit: 5,
-        offset: $offset
-      ) {
-        aggregate {
-          count
-        }
-        nodes {
-          id
-          title
-          slug
-          published_at
-          created_at
-          excerpt
-          image {
-            id
-            url
-          }
-          posts_tags {
-            tag {
-              id
-              name
-            }
-          }
-        }
-      }
-    }
-  }
-`
 
 
 export default Index

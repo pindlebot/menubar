@@ -18,15 +18,16 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#fff',
     fontSize: 16,
     maxWidth: 980,
-    margin: '0 auto'
+    margin: '0 auto',
+    marginBottom: 30
   }
 }))
 function Post (props) {
   const classes = useStyles(props)
-  const { pageContext: { post } } = props
+  const { pageContext, pageContext: { post } } = props
 
   return (
-    <Layout>
+    <Layout pageContext={pageContext}>
       <Paper className={classes.paper}>
         <Typography variant='h1' className={classes.title}>{post.title}</Typography>
         <Typography variant='subtitle1' className={classes.subheader}>
@@ -38,20 +39,5 @@ function Post (props) {
   )
 }
 
-
-// export const query = graphql`
-//   query($id: String!) {
-//     cms {
-//       posts(where: { id: { _eq: $id } }) {
-//         id
-//         title
-//         slug
-//         encoded_html
-//         published_at
-//         created_at
-//       }
-//     }
-//   }
-// `
 
 export default Post

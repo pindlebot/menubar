@@ -1,22 +1,11 @@
 {
   "name": "menubar",
+  "type": "static",
   "regions": [
     "us-east-1"
   ],
   "static": {
-    "dir": "dist"
-  },
-  "lambda": {
-    "memory": 1536,
-    "policy": [
-      {
-        "Effect": "Allow",
-        "Resource": "*",
-        "Action": [
-          "ses:SendEmail"
-        ]
-      }
-    ]
+    "dir": "public"
   },
   "environment": {},
   "hooks": {
