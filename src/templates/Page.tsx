@@ -1,6 +1,7 @@
 import React from 'react'
+import { navigate } from '@reach/router'
 import { Link } from 'gatsby'
-import { Collapse, Typography, Avatar, IconButton, Card, CardHeader, CardContent } from '@material-ui/core'
+import { Toolbar, Chip, Collapse, Typography, Avatar, IconButton, Card, CardHeader, CardContent } from '@material-ui/core'
 import { ExpandMore, ExpandLess } from '@material-ui/icons'
 import Layout from '../components/Layout'
 import { makeStyles } from '@material-ui/styles'
@@ -11,7 +12,11 @@ const useStyles = makeStyles(theme => ({
   card: {
     marginBottom: 24,
     boxShadow: '0px 4px 8px rgba(60,45,111,0.1), 0px 1px 3px rgba(60,45,111,0.15)',
-    padding: 20
+    padding: 20,
+    '&:hover': {
+      cursor: 'pointer',
+      boxShadow: '0 30px 60px -12px rgba(50,50,93,.25), 0 18px 36px -18px rgba(0,0,0,.3), 0 -12px 36px -8px rgba(0,0,0,.025)'
+    }
   },
   title: {
     fontSize: 20,
@@ -22,18 +27,31 @@ const useStyles = makeStyles(theme => ({
   },
   subheader: {
     color: '#718096'
+  },
+  chip: {
+    backgroundColor: '#48BB78',
+    color: '#fff',
+    marginRight: 10
   }
 }))
 
 function Entry (props) {
   const [expanded, setExpaded] = React.useState(false)
   const classes = useStyles(props)
-  const { avatar, id, title, slug, date, excerpt } = props
+  const { avatar, id, title, slug, date, excerpt, posts_tags } = props
 
-  const toggleExpand = () => setExpaded(exp => !exp)
+  const toggleExpand = (evt) => {
+    evt.preventDefault()
+    evt.stopPropagation()
+    setExpaded(exp => !exp)
+  }
+
+  const onClick = (evt) => {
+    navigate(slug)
+  }
 
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} onClick={onClick}>
       <CardHeader
         avatar={(
           <Avatar src={avatar} />
@@ -48,11 +66,20 @@ function Entry (props) {
             {date}
           </Typography>
         )}
-        action={
-          <IconButton aria-label='settings' onClick={toggleExpand}>
-            {expanded ? <ExpandLess /> : <ExpandMore />}
-          </IconButton>
-        }
+        action={(
+          <Toolbar>
+            <>
+              {posts_tags.map(({ tag }) => {
+                return (
+                  <Chip label={tag.name} className={classes.chip} key={tag.id} />
+                )
+              })}
+            </>
+            <IconButton aria-label='settings' onClick={toggleExpand}>
+              {expanded ? <ExpandLess /> : <ExpandMore />}
+            </IconButton>
+          </Toolbar>
+        )}
         disableTypography
       />
       <Collapse in={expanded}>
@@ -62,6 +89,10 @@ function Entry (props) {
       </Collapse>
     </Card>
   )
+}
+
+Entry.defaultProps = {
+  posts_tags: []
 }
 
 function Page (props) {

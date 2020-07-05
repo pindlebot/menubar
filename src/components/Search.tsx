@@ -95,7 +95,7 @@ function Search (props) {
               {results.map((option, index) => {
                 return (
                   <>
-                    <ListItem onMouseDown={evt => evt.preventDefault()}>
+                    <ListItem onMouseDown={evt => evt.preventDefault()} tabIndex={index} component='li'>
                       <ListItemAvatar>
                         <Avatar src={option.avatar} className={classes.avatar} />
                       </ListItemAvatar>
