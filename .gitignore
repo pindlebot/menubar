@@ -82,4 +82,4 @@ typings/
 .DS_Store
 dist
 
-public/
+public/*
