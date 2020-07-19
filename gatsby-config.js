@@ -46,6 +46,21 @@ module.exports = {
       },
     },
     `gatsby-plugin-react-helmet`,
-    'gatsby-plugin-material-ui'
+    'gatsby-plugin-material-ui',
+    // {
+    //   resolve: 'gatsby-plugin-fathom',
+    //   options: {
+    //     // Fathom server URL. Defaults to `cdn.usefathom.com`
+    //     trackingUrl: 'fathom.k8s.menubar.io',
+    //     // Unique site id
+    //     siteId: 'TJAWN',
+    //     // Domain whitelist
+    //     whitelistHostnames: [
+    //       'https://menubar.io',
+    //       'http://menubar.io',
+    //       'https://wwww.menubar.io'
+    //     ]
+    //   }
+    // }
   ],
 }

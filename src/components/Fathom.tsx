@@ -14,7 +14,7 @@ function Fathom (props) {
     }
     const ref = document.getElementsByTagName('script')[0]
     ref.parentNode.insertBefore(script, ref)
-    window.fathom('set', 'siteId', 'TJAWN')
+    window.fathom('set', 'siteId', 'CIGXT')
     window.fathom('trackPageview')
   }, [])
 
