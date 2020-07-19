@@ -2,13 +2,15 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { Typography, AppBar, Toolbar, Container, CssBaseline } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
+import { useLocation } from '@reach/router'
+import { useFathom } from '@menubar/fathom'
 import Search from './Search'
 import SEO from './SEO'
-import Fathom from './Fathom'
 
 const MenuIcon = props => (
   <svg aria-hidden="true" width="24" height=" 24" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 184c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm0 112c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm176-112c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm0 112c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zM80 184c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm0 112c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40z"></path></svg>
 )
+
 const prism = {
   'code[class*=language-],pre[class*=language-],pre[class*=language-] code': {
     color: '#1a202c !important',
@@ -164,7 +166,16 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+const useAnalytics = () => {
+  useFathom({
+    host: 'https://fathom.k8s.menubar.io',
+    siteId: 'CIGXT',
+    useLocation
+  })
+}
+
 function Layout (props) {
+  useAnalytics()
   const { searchData } = props
   const classes = useStyles(props)
   const { children } = props
@@ -172,7 +183,6 @@ function Layout (props) {
     <>
       <SEO />
       <CssBaseline />
-      <Fathom />
       <AppBar position='static' className={classes.appBar}>
         <Container maxWidth="md">
           <Toolbar disableGutters>

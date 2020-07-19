@@ -1548,6 +1548,11 @@
   resolved "https://registry.yarnpkg.com/@mdx-js/util/-/util-1.6.6.tgz#9c70eb7e7e4abc1083c8edf7151d35a19e442c00"
   integrity sha512-PKTHVgMHnK5p+kcMWWNnZuoR7O19VmHiOujmVcyN50hya7qIdDb5vvsYC+dwLxApEXiABhLozq0dlIwFeS3yjg==
 
+"@menubar/fathom@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@menubar/fathom/-/fathom-1.0.3.tgz#d6861580da2c02e23ca396c314806249f710a128"
+  integrity sha512-Q97tjhJwkcqSstdNsF9DFIXfiT4RiH9vy+8g65f3Gk6v189b8n9mUtBzus9Slonoa8tRRmOSQLchtUPyyGhQUQ==
+
 "@mikaelkristiansson/domready@^1.0.10":
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/@mikaelkristiansson/domready/-/domready-1.0.10.tgz#f6d69866c0857664e70690d7a0bfedb72143adb5"
