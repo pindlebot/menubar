@@ -167,11 +167,15 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const useAnalytics = () => {
-  useFathom({
+  const location = useLocation()
+  const [trackPageView] = useFathom({
     host: 'https://fathom.k8s.menubar.io',
     siteId: 'CIGXT',
-    useLocation
   })
+
+  React.useEffect(() => {
+    trackPageView({ url: location.href })
+  }, [location])
 }
 
 function Layout (props) {
