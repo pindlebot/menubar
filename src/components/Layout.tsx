@@ -166,20 +166,11 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const useAnalytics = () => {
-  const location = useLocation()
+function Layout (props) {
   const [trackPageView] = useFathom({
     host: 'https://fathom.k8s.menubar.io',
     siteId: 'CIGXT',
   })
-
-  React.useEffect(() => {
-    trackPageView({ url: location.href })
-  }, [location])
-}
-
-function Layout (props) {
-  useAnalytics()
   const { searchData } = props
   const classes = useStyles(props)
   const { children } = props
