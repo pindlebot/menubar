@@ -171,8 +171,8 @@ function Layout (props) {
   return (
     <>
       <SEO />
-      <Fathom />
       <CssBaseline />
+      <Fathom />
       <AppBar position='static' className={classes.appBar}>
         <Container maxWidth="md">
           <Toolbar disableGutters>

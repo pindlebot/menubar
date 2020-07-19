@@ -20,6 +20,7 @@ const useStyles = makeStyles(theme => ({
     marginBottom: 30
   }
 }))
+
 function Post (props) {
   const classes = useStyles(props)
   const { pageContext, pageContext: { post } } = props

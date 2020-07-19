@@ -7,8 +7,9 @@ declare global {
 function Fathom (props) {
   React.useEffect(() => {
     const script = document.createElement('script')
-    script.id = 'fathom'
-    script.src = '//fathom.k8s.menubar.io/tracker.js'
+    script.async = true
+    script.id = 'fathom-script'
+    script.src = 'https://fathom.k8s.menubar.io/tracker.js'
     window.fathom = window.fathom || function () {
       (window.fathom.q = window.fathom.q || []).push(arguments)
     }
