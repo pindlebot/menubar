@@ -53,7 +53,7 @@ module.exports = {
           fonts: {
             google: [
               {
-                family: "Open+Sans",
+                family: "Open Sans",
                 variants: ["300", "400", "500"],
               }
             ]

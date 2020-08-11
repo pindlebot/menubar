@@ -83,6 +83,16 @@ exports.createPages = async ({ actions, graphql }) => {
       nodes: posts.slice(0, 5),
     }
   })
+  actions.createPage({
+    path: '/about',
+    component: path.resolve('./src/templates/About.tsx'),
+    context: {
+      searchData,
+      endpoints: {
+        contactApiEndpoint: CONTACT_API_ENDPOINT
+      }
+    }
+  })
   new Array(Math.ceil(count / 5)).fill(0).forEach((_, i) => {
     const page = i + 1
     const offset = page * 5
@@ -110,16 +120,6 @@ exports.createPages = async ({ actions, graphql }) => {
     })
   })
 
-  actions.createPage({
-    path: '/about',
-    component: path.resolve('./src/templates/About.tsx'),
-    context: {
-      searchData,
-      endpoints: {
-        contactApiEndpoint: CONTACT_API_ENDPOINT
-      }
-    }
-  })
 }
 
 exports.onCreatePage = async ({ page, actions }) => {

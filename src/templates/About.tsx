@@ -101,15 +101,17 @@ function About(props) {
 
   const classes = useStyles(props)
   const {
-    pageContext: { searchData, endpoints }
+    pageContext
   } = props
+  const searchData = pageContext?.searchData || []
+  const endpoints = pageContext?.endpoints || {}
 
   const onClose = () => setOpen(false)
   const onOpen = () => setOpen(true)
   return (
     <SnackbarProvider>
       <Layout searchData={searchData}>
-        <ContactDialog open={open} onClose={onClose} contactApiEndpoint={endpoints.contactApiEndpoint} />
+        <ContactDialog open={open} onClose={onClose} contactApiEndpoint={endpoints?.contactApiEndpoint} />
         <Grid container spacing={3}>
           <Grid container item xs={8} direction="column">
             <Paper className={classes.paper}>
@@ -120,28 +122,14 @@ function About(props) {
                 I'm a full-stack software engineer at Deloitte. 
               </Typography>
               <Typography variant='body1' gutterBottom>
-                Using Geocities, I buit my first website when I was 12. Later, I studied classics, philosophy, and the history of mathh and science at St. John's College.
+                I buit my first website when I was 12 using Geocities. I studied classics, philosophy, and the history of math and science at St. John's College.
                 I also did a stint at the David Geffen School of Medicine at UCLA before pivoting to Software Engineering.
               </Typography>
 
-              <Typography variant='h6' gutterBottom>
-                Front-End
-              </Typography>
               <Typography variant='body1' gutterBottom>
-                I've spent the last three years working extensively with React, Redux, GraphQL (Apollo), and Typescrpt. 
-              </Typography>
-              <Typography variant='h6' gutterBottom>
-                Backend
-              </Typography>
-              <Typography variant='body1' gutterBottom>
-                I'm an advanced NodeJs developer and an interediate Java developer. 
-              </Typography>
-              <Typography variant='h6' gutterBottom>
-                DevOps
-              </Typography>
-              <Typography variant='body1' gutterBottom>
-                I have experience with Kubernetess, AWS, and GCP. This very page is deployed to my private Kubernetes cluster.
-              </Typography>
+                I've worked extensively with React, Redux, GraphQL (Apollo), and Typescrpt.
+                At Deloitte, I'm working on an internal project that relies heavily on Cassandra, ElasticSearch, Java, Node.Js, and Kubernetes.
+              </Typography>     
             </Paper>
           </Grid>
           <Grid container item xs={4} direction="column" alignItems="center">
@@ -175,6 +163,12 @@ function About(props) {
                     primary={'Contact Me'}
                     classes={{ primary: classes.link }}
                   />
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon></ListItemIcon>
+                  <ListItemText primary={(
+                    <a className={classes.link} href={'https://menubar-static.s3.amazonaws.com/resume.pdf'}>Resume</a>
+                  )} />
                 </ListItem>
               </List>
             </Paper>

@@ -18,7 +18,7 @@ const variables = {
 //   '"Segoe UI Symbol"'
 // ].join(',')
 
-const fontFamily = `"Open Sans", sans-serif`
+const fontFamily = `Open Sans, sans-serif`
 const theme = createMuiTheme({
   palette: {
     primary: {
