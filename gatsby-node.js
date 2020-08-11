@@ -3,6 +3,7 @@ const path = require('path')
 const format = require('date-fns/format')
 
 const dateFormat = 'MMMM d, yyyy'
+const CONTACT_API_ENDPOINT = 'https://contact.menubar.io'
 
 const transform = node => {
   const { encoded_html, ...rest } = node
@@ -107,6 +108,17 @@ exports.createPages = async ({ actions, graphql }) => {
         post: node
       }
     })
+  })
+
+  actions.createPage({
+    path: '/about',
+    component: path.resolve('./src/templates/About.tsx'),
+    context: {
+      searchData,
+      endpoints: {
+        contactApiEndpoint: CONTACT_API_ENDPOINT
+      }
+    }
   })
 }
 

@@ -5,6 +5,20 @@ const variables = {
   secondaryColor: '#3182ce'
 }
 
+// const fontFamily = [
+//   '-apple-system',
+//   'BlinkMacSystemFont',
+//   '"Segoe UI"',
+//   'Roboto',
+//   '"Helvetica Neue"',
+//   'Arial',
+//   'sans-serif',
+//   '"Apple Color Emoji"',
+//   '"Segoe UI Emoji"',
+//   '"Segoe UI Symbol"'
+// ].join(',')
+
+const fontFamily = `"Open Sans", sans-serif`
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -20,20 +34,15 @@ const theme = createMuiTheme({
   },
   typography: {
     fontSize: 14,
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"'
-    ].join(',')
+    fontFamily
   },
-  overrides: {}
+  overrides: {
+    MuiTypography: {
+      body1: {
+        fontFamily: fontFamily
+      }
+    }
+  }
 })
 
 export default theme

@@ -1,0 +1,46 @@
+service: menubar-contact
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-domain-manager
+
+custom:
+  stage: prod
+  debug: "*"
+  deploymentBucket: 'global-deployment-bucket'
+  customDomain:
+    domainName: contact.menubar.io
+    stage: ${self:provider.stage}
+    certificateName: '*.menubar.io'
+    createRoute53Record: true
+    certificateArn: 'arn:aws:acm:us-east-1:761245233224:certificate/6cee3a16-38f2-42de-9bd6-475ac7336d0c'
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${self:custom.stage}
+  region: us-east-1
+  disableLogs: false
+  logRetentionInDays: 7
+  deploymentBucket:
+    name: ${self:custom.deploymentBucket}
+  environment:
+    MAILGUN_DOMAIN: ${ssm:/menubar/mailgun-domain}
+    MAILGUN_API_KEY: ${ssm:/menubar/mailgun-api-key~true}
+    MAILGUN_SENDER: ${ssm:/menubar/mailgun-sender}
+    MAILGUN_RECIPIENT: ${ssm:/menubar/mailgun-recipient}
+functions:
+  handler:
+    timeout: 30
+    handler: src/handler.handler
+    events:
+      - http:
+          path: /
+          method: any
+          integration: lambda-proxy
+          cors: true
+
+resources:
+  Resources:
+    HandlerLogGroup:
+      Properties:
+        RetentionInDays: 7

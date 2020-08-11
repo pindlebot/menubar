@@ -46,7 +46,21 @@ module.exports = {
       },
     },
     `gatsby-plugin-react-helmet`,
-    'gatsby-plugin-material-ui',
+    {
+      resolve: `gatsby-theme-material-ui`,
+      options: {
+        webFontsConfig: {
+          fonts: {
+            google: [
+              {
+                family: "Open+Sans",
+                variants: ["300", "400", "500"],
+              }
+            ]
+          }
+        }
+      }  
+    },
     // {
     //   resolve: 'gatsby-plugin-fathom',
     //   options: {
