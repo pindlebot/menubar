@@ -122,13 +122,13 @@ function About(props) {
                 I'm a full-stack software engineer at Deloitte. 
               </Typography>
               <Typography variant='body1' gutterBottom>
-                I buit my first website when I was 12 with Geocities and have been passionate about web development ever since.
+                I built my first website when I was 12 with Geocities and have been passionate about web development ever since.
                 I studied classics and philosophy at St. John's College and did a stint at the David Geffen School of Medicine at UCLA before pivoting to Software Engineering.
               </Typography>
 
               <Typography variant='body1' gutterBottom>
                 At Deloitte, I'm working on an internal project that relies heavily on Cassandra, ElasticSearch, Java, Node.Js, and Kubernetes.
-                The front-end stack is comprised of React, Redux, GraphQL (Apollo), and Typescrpt.
+                The front-end stack is comprised of React, Redux, GraphQL (Apollo), and Typescript.
               </Typography>     
             </Paper>
           </Grid>
