@@ -12,7 +12,7 @@ import {
 import React from 'react'
 import Layout from '../components/Layout'
 import { makeStyles } from '@material-ui/styles'
-import { GitHub, Mail, LinkedIn } from '@material-ui/icons'
+import { Description, GitHub, Mail, LinkedIn } from '@material-ui/icons'
 import clsx from 'clsx'
 import profile from '../images/profile.jpeg'
 import ContactDialog from '../components/ContactDialog'
@@ -122,13 +122,13 @@ function About(props) {
                 I'm a full-stack software engineer at Deloitte. 
               </Typography>
               <Typography variant='body1' gutterBottom>
-                I buit my first website when I was 12 using Geocities. I studied classics, philosophy, and the history of math and science at St. John's College.
-                I also did a stint at the David Geffen School of Medicine at UCLA before pivoting to Software Engineering.
+                I buit my first website when I was 12 with Geocities and have been passionate about web development ever since.
+                I studied classics and philosophy at St. John's College and did a stint at the David Geffen School of Medicine at UCLA before pivoting to Software Engineering.
               </Typography>
 
               <Typography variant='body1' gutterBottom>
-                I've worked extensively with React, Redux, GraphQL (Apollo), and Typescrpt.
                 At Deloitte, I'm working on an internal project that relies heavily on Cassandra, ElasticSearch, Java, Node.Js, and Kubernetes.
+                The front-end stack is comprised of React, Redux, GraphQL (Apollo), and Typescrpt.
               </Typography>     
             </Paper>
           </Grid>
@@ -165,7 +165,7 @@ function About(props) {
                   />
                 </ListItem>
                 <ListItem>
-                  <ListItemIcon></ListItemIcon>
+                  <ListItemIcon><Description /></ListItemIcon>
                   <ListItemText primary={(
                     <a className={classes.link} href={'https://menubar-static.s3.amazonaws.com/resume.pdf'}>Resume</a>
                   )} />
