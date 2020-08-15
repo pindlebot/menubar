@@ -3,7 +3,8 @@ const path = require('path')
 const format = require('date-fns/format')
 
 const dateFormat = 'MMMM d, yyyy'
-const CONTACT_API_ENDPOINT = 'https://contact.menubar.io'
+
+const { CONTACT_API_ENDPOINT, RESUME_URI, AWS_S3_BUCKET, PROJECT_ID } = process.env
 
 const transform = node => {
   const { encoded_html, ...rest } = node
@@ -11,7 +12,7 @@ const transform = node => {
     ...rest,
     date: format(new Date(node.published_at || node.created_at), dateFormat),
     html: Buffer.from(encoded_html, 'base64').toString('utf8'),
-    avatar: node.image ? `https://s3.amazonaws.com/contentkit/${node.image.url}` : null
+    avatar: node.image ? `https://s3.amazonaws.com/${AWS_S3_BUCKET}/${node.image.url}` : null
   }
 }
 
@@ -20,7 +21,7 @@ const getSearchData = (nodes) => {
     id,
     title,
     slug: `/${slug}`,
-    avatar: image ? `https://s3.amazonaws.com/contentkit/${image.url}` : null,
+    avatar: image ? `https://s3.amazonaws.com/${AWS_S3_BUCKET}/${image.url}` : null,
     date: format(new Date(published_at || created_at), dateFormat)
   }))
 }
@@ -33,7 +34,7 @@ exports.createPages = async ({ actions, graphql }) => {
         posts_aggregate(
           where: {
             project_id: {
-              _eq: "${process.env.PROJECT_ID}"
+              _eq: "${PROJECT_ID}"
             }
           }
           order_by: {
@@ -89,7 +90,8 @@ exports.createPages = async ({ actions, graphql }) => {
     context: {
       searchData,
       endpoints: {
-        contactApiEndpoint: CONTACT_API_ENDPOINT
+        contactApiEndpoint: CONTACT_API_ENDPOINT,
+        resumeUri: RESUME_URI
       }
     }
   })

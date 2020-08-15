@@ -14,9 +14,10 @@ import Layout from '../components/Layout'
 import { makeStyles } from '@material-ui/styles'
 import { Description, GitHub, Mail, LinkedIn } from '@material-ui/icons'
 import clsx from 'clsx'
+import { SnackbarProvider } from 'notistack'
+
 import profile from '../images/profile.jpeg'
 import ContactDialog from '../components/ContactDialog'
-import { SnackbarProvider } from 'notistack'
 
 export enum TileType {
   ACCOUNT = 'account'
@@ -24,6 +25,7 @@ export enum TileType {
 
 const tiles = [
   {
+    key: 1,
     type: TileType.ACCOUNT,
     uri: 'https://github.com/unshift',
     primary: '@unshift',
@@ -31,6 +33,7 @@ const tiles = [
     icon: <GitHub />
   },
   {
+    key: 2,
     type: TileType.ACCOUNT,
     uri: 'https://github.com/scrollbars',
     primary: '@scrollbars',
@@ -38,6 +41,7 @@ const tiles = [
     icon: <GitHub />
   },
   {
+    key: 3,
     type: TileType.ACCOUNT,
     uri: 'https://www.linkedin.com/in/gardnerbenjamin/',
     primary: '@gardnerbenjamin',
@@ -100,9 +104,7 @@ function About(props) {
   const [open, setOpen] = React.useState(false)
 
   const classes = useStyles(props)
-  const {
-    pageContext
-  } = props
+  const { pageContext } = props
   const searchData = pageContext?.searchData || []
   const endpoints = pageContext?.endpoints || {}
 
@@ -111,35 +113,41 @@ function About(props) {
   return (
     <SnackbarProvider>
       <Layout searchData={searchData}>
-        <ContactDialog open={open} onClose={onClose} contactApiEndpoint={endpoints?.contactApiEndpoint} />
+        <ContactDialog
+          open={open}
+          onClose={onClose}
+          contactApiEndpoint={endpoints?.contactApiEndpoint}
+        />
         <Grid container spacing={3}>
-          <Grid container item xs={8} direction="column">
+          <Grid container item xs={8} direction='column'>
             <Paper className={classes.paper}>
-              <Typography variant="h1" className={classes.title} gutterBottom>
+              <Typography variant='h1' className={classes.title} gutterBottom>
                 Ben Gardner
               </Typography>
               <Typography variant='body1' gutterBottom>
-                I'm a full-stack software engineer at Deloitte. 
+                I'm a full-stack developer at Deloitte.
               </Typography>
               <Typography variant='body1' gutterBottom>
-                I built my first website when I was 12 with Geocities and have been passionate about web development ever since.
-                I studied classics and philosophy at St. John's College and did a stint at the David Geffen School of Medicine at UCLA before pivoting to Software Engineering.
+                I built my first website in the 90s with Geocities and have been
+                passionate about web development ever since.
               </Typography>
 
               <Typography variant='body1' gutterBottom>
-                At Deloitte, I'm working on an internal project that relies heavily on Cassandra, ElasticSearch, Java, Node.Js, and Kubernetes.
-                The front-end stack is comprised of React, Redux, GraphQL (Apollo), and Typescript.
-              </Typography>     
+                At Deloitte, I'm working on an internal project that relies
+                heavily on Cassandra, ElasticSearch, Java, Node.Js, and
+                Kubernetes. The front-end stack is comprised of React, Redux,
+                GraphQL (Apollo), and Typescript.
+              </Typography>
             </Paper>
           </Grid>
-          <Grid container item xs={4} direction="column" alignItems="center">
+          <Grid container item xs={4} direction='column' alignItems='center'>
             <Paper className={clsx(classes.paper, classes.flex)}>
               <Avatar src={profile} className={classes.avatar} />
               <Divider className={classes.divider} />
               <List className={classes.list}>
                 {tiles.map(tile => {
                   return (
-                    <ListItem button>
+                    <ListItem button key={tile.key}>
                       <ListItemIcon>{tile.icon}</ListItemIcon>
                       <ListItemText
                         primary={
@@ -165,10 +173,16 @@ function About(props) {
                   />
                 </ListItem>
                 <ListItem>
-                  <ListItemIcon><Description /></ListItemIcon>
-                  <ListItemText primary={(
-                    <a className={classes.link} href={'https://menubar-static.s3.amazonaws.com/resume.pdf'}>Resume</a>
-                  )} />
+                  <ListItemIcon>
+                    <Description />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={
+                      <a className={classes.link} href={endpoints.resumeUri}>
+                        Resume
+                      </a>
+                    }
+                  />
                 </ListItem>
               </List>
             </Paper>
